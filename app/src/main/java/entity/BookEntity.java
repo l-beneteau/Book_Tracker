@@ -2,19 +2,28 @@ package entity;
 
 
 import back.Rating;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import lombok.*;
 
 @Entity
 @Getter@Setter
 @AllArgsConstructor@RequiredArgsConstructor
+@Table(name = "Book")
 public class BookEntity {
     @NonNull private int id;
     @NonNull private String title;
-    @NonNull private AuthorEntity author;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Book_Author",
+            joinColumns = { @JoinColumn(name = "Book_Id") },
+            inverseJoinColumns = { @JoinColumn(name = "Author_Id") }
+    )
+    @NonNull Set<AuthorEntity> authors = new HashSet<>();
     private String series;
     private int year;
     private String genre;

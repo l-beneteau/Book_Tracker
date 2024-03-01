@@ -3,15 +3,22 @@ package entity;
 
 import jakarta.persistence.Entity;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@RequiredArgsConstructor
 @Getter
+@Table(name = "Author")
 public class AuthorEntity {
-    private int id;
-    private String name;
+    @NonNull private int id;
+    @NonNull private String name;
+
+    @ManyToMany(mappedBy = "projects")
+    private final Set<BookEntity> books = new HashSet<>();
 
 }
