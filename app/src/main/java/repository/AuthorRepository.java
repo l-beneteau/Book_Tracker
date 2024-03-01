@@ -4,6 +4,6 @@ import entity.AuthorEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AuthorRepository extends CrudRepository<AuthorEntity, Integer> {
-    AuthorEntity findByID(int id);
-    AuthorEntity findByName(String name);
+    public AuthorEntity findByID(int id);
+    public AuthorEntity findByName(String name);
 }
