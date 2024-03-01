@@ -1,4 +1,4 @@
-package entity;
+package org.booktracker.entity;
 
 
 import jakarta.persistence.Entity;
@@ -19,6 +19,6 @@ public class AuthorEntity {
     @NonNull private String name;
 
     @ManyToMany(mappedBy = "projects")
-    private final Set<BookEntity> books = new HashSet<>();
+    private final Set<org.booktracker.entity.BookEntity> books = new HashSet<>();
 
 }

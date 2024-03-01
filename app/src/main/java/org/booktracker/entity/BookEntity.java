@@ -1,7 +1,7 @@
-package entity;
+package org.booktracker.entity;
 
 
-import back.Rating;
+import org.booktracker.back.Rating;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -23,7 +23,7 @@ public class BookEntity {
             joinColumns = { @JoinColumn(name = "Book_Id") },
             inverseJoinColumns = { @JoinColumn(name = "Author_Id") }
     )
-    @NonNull Set<AuthorEntity> authors = new HashSet<>();
+    @NonNull Set<org.booktracker.entity.AuthorEntity> authors = new HashSet<>();
     private String series;
     private int year;
     private String genre;
@@ -33,7 +33,7 @@ public class BookEntity {
     private boolean readed;
     private Date started;
     private Date ended;
-    @Convert(converter = RatingConverter.class)
+    @Convert(converter = org.booktracker.entity.RatingConverter.class)
     private Rating rating;
     private String notes;
 
