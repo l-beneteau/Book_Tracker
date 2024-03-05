@@ -11,17 +11,22 @@ import java.util.Set;
 import lombok.*;
 
 @Entity
-@Getter@Setter
-@AllArgsConstructor@RequiredArgsConstructor
-@Table(name = "Book")
+@Getter
+@Setter
+@AllArgsConstructor
+//@RequiredArgsConstructor
+@NoArgsConstructor
+@Table(name = "book", schema = "public")
 public class BookEntity {
-    @NonNull private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NonNull private int book_id;
     @NonNull private String title;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "Book_Author",
-            joinColumns = { @JoinColumn(name = "Book_Id") },
-            inverseJoinColumns = { @JoinColumn(name = "Author_Id") }
+            name = "book_author",
+            joinColumns = { @JoinColumn(name = "book_id") },
+            inverseJoinColumns = { @JoinColumn(name = "author_id") }
     )
     @NonNull Set<org.booktracker.entity.AuthorEntity> authors = new HashSet<>();
     private String series;
@@ -37,5 +42,13 @@ public class BookEntity {
     private Rating rating;
     private String notes;
 
+    public BookEntity(int id, String title, Set<AuthorEntity> authors) {
+        this.book_id = id;
+        this.title = title;
+        this.authors = authors;
+    }
+
+    public BookEntity(){
+    }
 
 }

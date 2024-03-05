@@ -1,24 +1,32 @@
 package org.booktracker.entity;
 
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Getter
-@Table(name = "Author")
+@Setter
+@Table(name = "author", schema = "public")
 public class AuthorEntity {
-    @NonNull private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NonNull private int author_id;
     @NonNull private String name;
 
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany(mappedBy = "authors")
     private final Set<org.booktracker.entity.BookEntity> books = new HashSet<>();
 
+    public AuthorEntity(int id, String name) {
+        this.author_id = id;
+        this.name = name;
+    }
+
+    public AuthorEntity (){
+    }
 }

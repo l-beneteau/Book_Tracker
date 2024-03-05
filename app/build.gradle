@@ -38,12 +38,13 @@ dependencies {
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
 
-    // https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
-    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '3.2.3'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.2.3'
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.2.3'
 
+    implementation 'org.postgresql:postgresql:42.7.0'
 
 }
 
@@ -56,5 +57,5 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'org.example.App'
+    mainClass = 'org.booktracker.Application'
 }
