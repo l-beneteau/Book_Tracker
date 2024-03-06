@@ -50,4 +50,60 @@ public class BookEntity {
     public BookEntity() {
 
     }
+
+    public Integer getBook_id() {
+        return book_id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Set<AuthorEntity> getAuthors() {
+        return authors;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public boolean isFrench() {
+        return french;
+    }
+
+    public boolean isLibrary() {
+        return library;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public boolean isReaded() {
+        return readed;
+    }
+
+    public Date getStarted() {
+        return started;
+    }
+
+    public Date getEnded() {
+        return ended;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
 }
