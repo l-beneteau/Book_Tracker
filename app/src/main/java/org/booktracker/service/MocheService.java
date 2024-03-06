@@ -21,9 +21,9 @@ public class MocheService {
     @PostConstruct
     void init() {
         bookRepository.save(
-                new BookEntity(1, "Picha le BG", Set.of(new AuthorEntity(1, "Les mamans de Picha")))
+                new BookEntity("Picha le BG", Set.of(new AuthorEntity("Les mamans de Picha")))
         );
-        bookRepository.findByTitle("Picha le BG");
+        //bookRepository.findByTitle("Picha le BG");
     }
 }
 

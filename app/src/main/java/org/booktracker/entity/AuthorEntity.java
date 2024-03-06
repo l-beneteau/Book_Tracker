@@ -16,17 +16,20 @@ import java.util.Set;
 public class AuthorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull private int author_id;
+    @NonNull private Integer author_id;
     @NonNull private String name;
 
     @ManyToMany(mappedBy = "authors")
-    private final Set<org.booktracker.entity.BookEntity> books = new HashSet<>();
+    private final Set<BookEntity> books = new HashSet<>();
 
-    public AuthorEntity(int id, String name) {
-        this.author_id = id;
+    public AuthorEntity(@NonNull String name) {
         this.name = name;
     }
 
     public AuthorEntity (){
+    }
+
+    public Set<BookEntity> getBooks() {
+        return books;
     }
 }

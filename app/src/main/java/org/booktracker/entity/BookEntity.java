@@ -15,12 +15,12 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 //@RequiredArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Table(name = "book", schema = "public")
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull private int book_id;
+    @NonNull private Integer book_id;
     @NonNull private String title;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -42,13 +42,12 @@ public class BookEntity {
     private Rating rating;
     private String notes;
 
-    public BookEntity(int id, String title, Set<AuthorEntity> authors) {
-        this.book_id = id;
+    public BookEntity(String title, Set<AuthorEntity> authors) {
         this.title = title;
         this.authors = authors;
     }
 
-    public BookEntity(){
-    }
+    public BookEntity() {
 
+    }
 }
