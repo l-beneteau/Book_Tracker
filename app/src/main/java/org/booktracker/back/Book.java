@@ -16,7 +16,7 @@ public class Book {
     @NonNull
     private Integer book_id;
     @NonNull private String title;
-    @NonNull Set<AuthorEntity> authors = new HashSet<>();
+    @NonNull Set<Author> authors = new HashSet<>();
     private String series;
     private int year;
     private String genre;
@@ -29,13 +29,13 @@ public class Book {
     private Rating rating;
     private String notes;
 
-    public Book(@NonNull Integer book_id, @NonNull String title, @NonNull Set<AuthorEntity> authors) {
+    public Book(@NonNull Integer book_id, @NonNull String title, @NonNull Set<Author> authors) {
         this.book_id = book_id;
         this.title = title;
         this.authors = authors;
     }
 
-    public Book(@NonNull Integer book_id, @NonNull String title, @NonNull Set<AuthorEntity> authors, String series, int year, String genre, boolean french, boolean library, int pages, boolean readed, Date started, Date ended, Rating rating, String notes) {
+    public Book(@NonNull Integer book_id, @NonNull String title, @NonNull Set<Author> authors, String series, int year, String genre, boolean french, boolean library, int pages, boolean readed, Date started, Date ended, Rating rating, String notes) {
         this.book_id = book_id;
         this.title = title;
         this.authors = authors;
@@ -60,7 +60,7 @@ public class Book {
         return title;
     }
 
-    public Set<AuthorEntity> getAuthors() {
+    public Set<Author> getAuthors() {
         return authors;
     }
 
@@ -116,7 +116,7 @@ public class Book {
         this.title = title;
     }
 
-    public void setAuthors(Set<AuthorEntity> authors) {
+    public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
 
