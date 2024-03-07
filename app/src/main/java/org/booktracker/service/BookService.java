@@ -24,10 +24,10 @@ public class BookService {
         return new Book(bookEntity.getBook_id(), bookEntity.getTitle(), authors);
     }
 
-    public Set<Book> findAllBooks(){
-       Set<Book> books = new HashSet<>();
+    public List<Book> findAllBooks(){
+       List<Book> books = new ArrayList<>();
        Iterable<BookEntity> bookEntitiesIterable = bookRepository.findAll();
-       Set<BookEntity> bookEntitiesSet = new HashSet<>();
+       List<BookEntity> bookEntitiesSet = new ArrayList<>();
        bookEntitiesIterable.forEach(bookEntitiesSet::add);
        for (BookEntity bookEntity : bookEntitiesSet){
            Set<Author> authors = new HashSet<>();
