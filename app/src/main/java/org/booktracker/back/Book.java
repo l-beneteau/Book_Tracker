@@ -107,4 +107,60 @@ public class Book {
     public String getNotes() {
         return notes;
     }
+
+    public void setBook_id(Integer book_id) {
+        this.book_id = book_id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthors(Set<AuthorEntity> authors) {
+        this.authors = authors;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setFrench(boolean french) {
+        this.french = french;
+    }
+
+    public void setLibrary(boolean library) {
+        this.library = library;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
+    public void setReaded(boolean readed) {
+        this.readed = readed;
+    }
+
+    public void setStarted(Date started) {
+        this.started = started;
+    }
+
+    public void setEnded(Date ended) {
+        this.ended = ended;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }
