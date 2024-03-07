@@ -24,7 +24,7 @@ public class BookController {
     }
 
     @GetMapping(value = "/all", produces = "application/json")
-    public Set<Book> getBook() {
+    public Set<Book> getAllBooks() {
         return bookService.findAllBooks();
     }
 
