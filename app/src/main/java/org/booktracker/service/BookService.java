@@ -18,10 +18,7 @@ public class BookService {
 
     public Book findBookById(int id) {
         BookEntity bookEntity = bookRepository.findById(id);
-        Set<Author> authors = new HashSet<>();
-        for (AuthorEntity author : bookEntity.getAuthors())
-            authors.add(new Author(author.getAuthor_id(), author.getName()));
-        return new Book(bookEntity.getBook_id(), bookEntity.getTitle(), authors);
+        return new Book(bookEntity.getBook_id(), bookEntity.getTitle(), getAuthorsFromBookEntity(bookEntity));
     }
 
     public List<Book> findAllBooks(){
@@ -30,11 +27,17 @@ public class BookService {
        List<BookEntity> bookEntitiesSet = new ArrayList<>();
        bookEntitiesIterable.forEach(bookEntitiesSet::add);
        for (BookEntity bookEntity : bookEntitiesSet){
-           Set<Author> authors = new HashSet<>();
-           for (AuthorEntity author : bookEntity.getAuthors())
-               authors.add(new Author(author.getAuthor_id(), author.getName()));
-           books.add(new Book(bookEntity.getBook_id(), bookEntity.getTitle(), authors));
+           books.add(new Book(bookEntity.getBook_id(), bookEntity.getTitle(), getAuthorsFromBookEntity(bookEntity)));
        }
        return books;
     }
+
+    private Set<Author> getAuthorsFromBookEntity(BookEntity bookEntity){
+        Set<Author> authors = new HashSet<>();
+        for (AuthorEntity author : bookEntity.getAuthors())
+            authors.add(new Author(author.getAuthor_id(), author.getName()));
+        return authors;
+    }
+
+
 }
