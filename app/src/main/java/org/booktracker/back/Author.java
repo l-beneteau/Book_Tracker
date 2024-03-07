@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
 
-@AllArgsConstructor
-@RequiredArgsConstructor
+//@AllArgsConstructor
+//@RequiredArgsConstructor
 public class Author {
     @NonNull
     private Integer author_id;
@@ -26,5 +26,23 @@ public class Author {
         this.name = name;
     }
 
+    public Integer getAuthor_id() {
+        return author_id;
+    }
 
+    public void setAuthor_id(Integer author_id) {
+        this.author_id = author_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
 }
