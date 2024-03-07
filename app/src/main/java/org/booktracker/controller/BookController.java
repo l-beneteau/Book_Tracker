@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.booktracker.service.BookService;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("book")
 public class BookController {
@@ -20,6 +22,13 @@ public class BookController {
     public Book getBook(@PathVariable int id) {
         return bookService.findBookById(id);
     }
+
+    @GetMapping(value = "/all", produces = "application/json")
+    public Set<Book> getBook() {
+        return bookService.findAllBooks();
+    }
+
+
 
 
 }

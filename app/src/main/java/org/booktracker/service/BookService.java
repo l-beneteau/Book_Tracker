@@ -8,8 +8,7 @@ import org.booktracker.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class BookService {
@@ -23,5 +22,19 @@ public class BookService {
         for (AuthorEntity author : bookEntity.getAuthors())
             authors.add(new Author(author.getAuthor_id(), author.getName()));
         return new Book(bookEntity.getBook_id(), bookEntity.getTitle(), authors);
+    }
+
+    public Set<Book> findAllBooks(){
+       Set<Book> books = new HashSet<>();
+       Iterable<BookEntity> bookEntitiesIterable = bookRepository.findAll();
+       Set<BookEntity> bookEntitiesSet = new HashSet<>();
+       bookEntitiesIterable.forEach(bookEntitiesSet::add);
+       for (BookEntity bookEntity : bookEntitiesSet){
+           Set<Author> authors = new HashSet<>();
+           for (AuthorEntity author : bookEntity.getAuthors())
+               authors.add(new Author(author.getAuthor_id(), author.getName()));
+           books.add(new Book(bookEntity.getBook_id(), bookEntity.getTitle(), authors));
+       }
+       return books;
     }
 }
