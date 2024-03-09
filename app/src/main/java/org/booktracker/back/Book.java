@@ -10,10 +10,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-//☺@AllArgsConstructor
-@RequiredArgsConstructor
 public class Book {
-    @NonNull
     private Integer book_id;
     @NonNull private String title;
     @NonNull Set<Author> authors = new HashSet<>();
@@ -50,6 +47,14 @@ public class Book {
         this.ended = ended;
         this.rating = rating;
         this.notes = notes;
+    }
+
+    public Book(@NonNull String title, @NonNull Set<Author> authors) {
+        this.title = title;
+        this.authors = authors;
+    }
+
+    public Book() {
     }
 
     public Integer getBook_id() {

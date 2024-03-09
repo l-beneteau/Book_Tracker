@@ -16,7 +16,8 @@ import java.util.Set;
 public class AuthorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull private Integer author_id;
+    @Column(name = "author_id")
+    @NonNull private Integer authorId;
     @NonNull private String name;
 
     @ManyToMany(mappedBy = "authors")
@@ -33,12 +34,12 @@ public class AuthorEntity {
         return books;
     }
 
-    public Integer getAuthor_id() {
-        return author_id;
+    public Integer getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor_id(Integer author_id) {
-        this.author_id = author_id;
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
     }
 
     public String getName() {
