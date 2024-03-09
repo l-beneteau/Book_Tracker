@@ -5,3 +5,5 @@
 build
 
 **/resources/application*.properties
+
+.idea
