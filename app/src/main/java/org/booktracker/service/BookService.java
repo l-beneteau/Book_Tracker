@@ -23,8 +23,8 @@ public class BookService {
 
     private Book getBookFromEntity(BookEntity bookEntity) {
         Book book = new Book();
-        book.setBook_id(book.getBook_id());
-        book.setTitle(book.getTitle());
+        book.setBook_id(bookEntity.getBook_id());
+        book.setTitle(bookEntity.getTitle());
         book.setAuthors(getAuthorsFromBookEntity(bookEntity));
         return book;
     }
