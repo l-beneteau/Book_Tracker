@@ -24,11 +24,11 @@ public class BookController {
            return bookService.findBookById(id);
         } catch (BookNotFoundException e){
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Book "+ id + " Not Found", e);
+                    HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
-
-
     }
+
+
 
     @GetMapping(value = "/all", produces = "application/json")
     public List<Book> getAllBooks() {

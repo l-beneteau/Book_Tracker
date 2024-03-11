@@ -20,7 +20,15 @@ public class BookService {
     public Book findBookById(int id) throws BookNotFoundException{
         BookEntity bookEntity = bookRepository.findById(id);
         if (bookEntity == null){
-            throw new BookNotFoundException();
+            throw new BookNotFoundException(id);
+        }
+        return getBookFromEntity(bookEntity);
+    }
+
+    public Book findBookByTitle(String title) throws BookNotFoundException{
+        BookEntity bookEntity = bookRepository.findByTitle(title);
+        if (bookEntity == null){
+            throw new BookNotFoundException(title);
         }
         return getBookFromEntity(bookEntity);
     }
