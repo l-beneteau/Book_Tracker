@@ -3,6 +3,7 @@ package org.booktracker.controller;
 import org.booktracker.exception.BookNotFoundException;
 import org.booktracker.model.Book;
 import org.booktracker.entity.BookEntity;
+import org.booktracker.response.BookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +20,9 @@ public class BookController {
     @Autowired
     BookService bookService;
     @GetMapping(value = "/{id}", produces = "application/json")
-    public Book getBookById(@PathVariable int id) {
+    public BookResponse getBookById(@PathVariable int id) {
         try {
-           return bookService.findBookById(id);
+           return BookResponse.from(bookService.findBookById(id));
         } catch (BookNotFoundException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage(), e);

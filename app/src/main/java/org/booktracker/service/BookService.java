@@ -60,6 +60,9 @@ public class BookService {
 
 
     public BookEntity saveBook(Book newBook) {
+        if(bookRepository.findByTitle(newBook.getTitle()) != null){
+            return bookRepository.findByTitle(newBook.getTitle());
+        }
         BookEntity bookEntity = new BookEntity();
         bookEntity.setTitle(newBook.getTitle());
         bookEntity.setAuthors(getAuthorEntitiesFromBook(newBook));
