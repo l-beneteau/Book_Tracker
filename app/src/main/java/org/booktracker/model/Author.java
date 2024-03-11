@@ -5,7 +5,7 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Author {

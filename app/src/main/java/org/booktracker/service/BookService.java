@@ -52,8 +52,11 @@ public class BookService {
 
     private Set<Author> getAuthorsFromBookEntity(BookEntity bookEntity){
         Set<Author> authors = new HashSet<>();
-        for (AuthorEntity author : bookEntity.getAuthors()) {
-            authors.add(new Author(author.getAuthorId(), author.getName()));
+        for (AuthorEntity authorEntity : bookEntity.getAuthors()) {
+            Author author = new Author();
+            author.setAuthorId(authorEntity.getAuthorId());
+            author.setName(authorEntity.getName());
+            authors.add(author);
         }
         return authors;
     }
