@@ -1,7 +1,8 @@
 package org.booktracker.service;
 
-import org.booktracker.back.Author;
-import org.booktracker.back.Book;
+import org.booktracker.exception.BookNotFoundException;
+import org.booktracker.model.Author;
+import org.booktracker.model.Book;
 import org.booktracker.entity.AuthorEntity;
 import org.booktracker.entity.BookEntity;
 import org.booktracker.repository.BookRepository;
@@ -16,8 +17,11 @@ public class BookService {
     @Autowired
     BookRepository bookRepository;
 
-    public Book findBookById(int id) {
+    public Book findBookById(int id) throws BookNotFoundException{
         BookEntity bookEntity = bookRepository.findById(id);
+        if (bookEntity == null){
+            throw new BookNotFoundException();
+        }
         return getBookFromEntity(bookEntity);
     }
 

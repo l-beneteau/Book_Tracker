@@ -1,6 +1,6 @@
 package org.booktracker.entity;
 
-import org.booktracker.back.Rating;
+import org.booktracker.model.Rating;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

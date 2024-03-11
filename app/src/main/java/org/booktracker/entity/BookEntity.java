@@ -1,7 +1,7 @@
 package org.booktracker.entity;
 
 
-import org.booktracker.back.Rating;
+import org.booktracker.model.Rating;
 import jakarta.persistence.*;
 
 import java.util.Date;

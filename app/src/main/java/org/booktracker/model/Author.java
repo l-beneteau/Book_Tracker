@@ -1,4 +1,4 @@
-package org.booktracker.back;
+package org.booktracker.model;
 
 import lombok.*;
 
