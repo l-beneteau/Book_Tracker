@@ -80,4 +80,8 @@ public class BookService {
         authorEntity.setName(author.getName());
         return authorEntity;
     }
+
+    public void deleteBookById(int id){
+        bookRepository.deleteById(id);
+    }
 }
