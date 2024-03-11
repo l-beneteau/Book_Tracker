@@ -30,9 +30,9 @@ public class BookController {
     }
 
     @GetMapping()
-    public Book getBookByTitle(@RequestParam String title) {
+    public BookResponse getBookByTitle(@RequestParam String title) {
         try {
-            return bookService.findBookByTitle(title);
+            return BookResponse.from(bookService.findBookByTitle(title));
         } catch (BookNotFoundException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage(), e);
