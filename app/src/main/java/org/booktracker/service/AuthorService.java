@@ -63,4 +63,8 @@ public class AuthorService {
         }
         return bookEntities;
     }
+
+    public void deleteAuthorById(int id){
+        authorRepository.deleteById(id);
+    }
 }

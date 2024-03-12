@@ -42,4 +42,10 @@ public class AuthorController {
     public AuthorEntity newAuthor(@RequestBody Author author) {
         return authorService.saveAuthor(author);
     }
+
+    @DeleteMapping("/{id}")
+    void deleteAuthorById(@PathVariable int id) {
+        authorService.deleteAuthorById(id);
+    }
+
 }
