@@ -3,6 +3,7 @@ package org.booktracker.controller;
 import org.booktracker.exception.BookNotFoundException;
 import org.booktracker.model.Book;
 import org.booktracker.entity.BookEntity;
+import org.booktracker.parameter.BookParameter;
 import org.booktracker.response.BookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,25 +32,30 @@ public class BookController {
     }
 
     @GetMapping()
-    public BookResponse getBookByTitle(@RequestParam String title) {
+    public List<BookResponse> getBooks(BookParameter bookParameter) {
+        List<BookResponse> bookResponses = new ArrayList<>();
         try {
-            return BookResponse.from(bookService.findBookByTitle(title));
+            List<Book> books = bookService.findBooks(bookParameter);
+            for (Book book : books){
+                bookResponses.add(BookResponse.from(book));
+            }
         } catch (BookNotFoundException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
-    }
-
-
-    @GetMapping(produces = "application/json")
-    public List<BookResponse> getAllBooks() {
-        List<Book> books = bookService.findAllBooks();
-        List<BookResponse> bookResponses = new ArrayList<>();
-        for (Book book : books){
-            bookResponses.add(BookResponse.from(book));
-        }
         return bookResponses;
     }
+
+
+//    @GetMapping(produces = "application/json")
+//    public List<BookResponse> getAllBooks() {
+//        List<Book> books = bookService.findAllBooks();
+//        List<BookResponse> bookResponses = new ArrayList<>();
+//        for (Book book : books){
+//            bookResponses.add(BookResponse.from(book));
+//        }
+//        return bookResponses;
+//    }
 
     @PostMapping(value = "/add")
     BookEntity newBook(@RequestBody Book book) {

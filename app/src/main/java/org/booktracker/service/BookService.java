@@ -5,6 +5,7 @@ import org.booktracker.model.Author;
 import org.booktracker.model.Book;
 import org.booktracker.entity.AuthorEntity;
 import org.booktracker.entity.BookEntity;
+import org.booktracker.parameter.BookParameter;
 import org.booktracker.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +26,28 @@ public class BookService {
         return getBookFromEntity(bookEntity);
     }
 
-    public Book findBookByTitle(String title) throws BookNotFoundException{
-        BookEntity bookEntity = bookRepository.findByTitle(title);
-        if (bookEntity == null){
-            throw new BookNotFoundException(title);
+//    public Book findBookByTitle(String title) throws BookNotFoundException{
+//        BookEntity bookEntity = bookRepository.findByTitle(title);
+//        if (bookEntity == null){
+//            throw new BookNotFoundException(title);
+//        }
+//        return getBookFromEntity(bookEntity);
+//    }
+
+    public List<Book> findBooks(BookParameter bookParameter) throws BookNotFoundException {
+//        List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
+//                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getPages(), bookParameter.isRead(),
+//                bookParameter.getRating());
+        List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
+                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.isRead(), bookParameter.getRating());
+        if (bookEntities.isEmpty()){
+            throw new BookNotFoundException("Book");
         }
-        return getBookFromEntity(bookEntity);
+        List<Book> books = new ArrayList<>();
+        for(BookEntity bookEntity : bookEntities){
+            books.add(getBookFromEntity(bookEntity));
+        }
+        return books;
     }
 
     private Book getBookFromEntity(BookEntity bookEntity) {
@@ -41,14 +58,14 @@ public class BookService {
         return book;
     }
 
-    public List<Book> findAllBooks(){
-       List<Book> books = new ArrayList<>();
-       Iterable<BookEntity> bookEntities = bookRepository.findAll();
-       for (BookEntity bookEntity : bookEntities){
-           books.add(getBookFromEntity(bookEntity));
-       }
-       return books;
-    }
+//    public List<Book> findAllBooks(){
+//       List<Book> books = new ArrayList<>();
+//       Iterable<BookEntity> bookEntities = bookRepository.findAll();
+//       for (BookEntity bookEntity : bookEntities){
+//           books.add(getBookFromEntity(bookEntity));
+//       }
+//       return books;
+//    }
 
     private Set<Author> getAuthorsFromBookEntity(BookEntity bookEntity){
         Set<Author> authors = new HashSet<>();

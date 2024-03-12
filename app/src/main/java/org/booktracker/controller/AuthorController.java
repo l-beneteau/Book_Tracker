@@ -31,17 +31,6 @@ public class AuthorController {
         }
     }
 
-//    @GetMapping()
-//    public AuthorResponse getAuthorByName(@RequestParam String name) {
-//        try {
-//            return AuthorResponse.from(authorService.findAuthorByName(name));
-//        } catch (AuthorNotFoundException e){
-//            throw new ResponseStatusException(
-//                    HttpStatus.NOT_FOUND, e.getMessage(), e);
-//        }
-//    }
-
-
     @GetMapping
     public List<AuthorResponse> getAuthors(AuthorParameter authorParameter) {
         List<AuthorResponse> authorResponses = new ArrayList<>();
