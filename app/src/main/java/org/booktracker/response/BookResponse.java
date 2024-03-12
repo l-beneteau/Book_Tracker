@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Data
 public class BookResponse {
-    private Integer book_id;
+    private Integer bookId;
     private String title;
     Set<AuthorOfBookResponse> authors = new HashSet<>();
     private String series;
@@ -28,7 +28,7 @@ public class BookResponse {
     
     public static BookResponse from(Book book){
         BookResponse bookResponse = new BookResponse();
-        bookResponse.book_id = book.getBook_id();
+        bookResponse.bookId = book.getBookId();
         bookResponse.title = book.getTitle();
         bookResponse.series = book.getSeries();
         bookResponse.year = book.getYear();

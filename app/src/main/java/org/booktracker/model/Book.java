@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class Book {
-    private Integer book_id;
+    private Integer bookId;
     private String title;
     Set<Author> authors = new HashSet<>();
     private String series;

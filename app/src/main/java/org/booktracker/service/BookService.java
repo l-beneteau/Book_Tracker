@@ -35,7 +35,7 @@ public class BookService {
 
     private Book getBookFromEntity(BookEntity bookEntity) {
         Book book = new Book();
-        book.setBook_id(bookEntity.getBook_id());
+        book.setBookId(bookEntity.getBookId());
         book.setTitle(bookEntity.getTitle());
         book.setAuthors(getAuthorsFromBookEntity(bookEntity));
         return book;

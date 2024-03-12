@@ -6,7 +6,7 @@ import org.booktracker.model.Rating;
 import java.util.Date;
 
 public class BookOfAuthorResponse {
-    private Integer book_id;
+    private Integer bookId;
     private String title;
     private String series;
     private Integer year;
@@ -22,7 +22,7 @@ public class BookOfAuthorResponse {
 
     public static BookOfAuthorResponse from(Book book) {
         BookOfAuthorResponse bookOfAuthorResponse = new BookOfAuthorResponse();
-        bookOfAuthorResponse.book_id = book.getBook_id();
+        bookOfAuthorResponse.bookId = book.getBookId();
         bookOfAuthorResponse.title = book.getTitle();
         bookOfAuthorResponse.series = book.getSeries();
         bookOfAuthorResponse.year = book.getYear();

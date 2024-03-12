@@ -18,12 +18,12 @@ import lombok.*;
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer book_id;
+    private Integer bookId;
     private String title;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "book_author",
-            joinColumns = { @JoinColumn(name = "book_id") },
+            joinColumns = { @JoinColumn(name = "bookId") },
             inverseJoinColumns = { @JoinColumn(name = "author_id") }
     )
     Set<org.booktracker.entity.AuthorEntity> authors = new HashSet<>();

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.booktracker.service.BookService;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,8 +42,13 @@ public class BookController {
 
 
     @GetMapping(value = "/all", produces = "application/json")
-    public List<Book> getAllBooks() {
-        return bookService.findAllBooks();
+    public List<BookResponse> getAllBooks() {
+        List<Book> books = bookService.findAllBooks();
+        List<BookResponse> bookResponses = new ArrayList<>();
+        for (Book book : books){
+            bookResponses.add(BookResponse.from(book));
+        }
+        return bookResponses;
     }
 
     @PostMapping(value = "/add")

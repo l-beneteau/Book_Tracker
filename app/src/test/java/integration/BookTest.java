@@ -21,6 +21,6 @@ public class BookTest extends BaseIntegrationTest {
 
         ReadContext jsonPath = JsonPath.parse(json);
 
-        assertEquals("17", jsonPath.read("$.book_id").toString());
+        assertEquals("17", jsonPath.read("$.bookId").toString());
     }
 }
