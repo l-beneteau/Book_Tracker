@@ -12,6 +12,9 @@ public class Author {
     private Integer authorId;
     private String name;
 
-    private final Set<Book> books = new HashSet<>();
+    private Set<Book> books = new HashSet<>();
 
+    public void addBook(Book book) {
+        books.add(book);
+    }
 }

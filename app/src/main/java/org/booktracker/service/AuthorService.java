@@ -32,7 +32,26 @@ public class AuthorService {
         Author author = new Author();
         author.setAuthorId(authorEntity.getAuthorId());
         author.setName(authorEntity.getName());
+        author.setBooks(getBooksFromAuthorEntity(authorEntity));
         return author;
+    }
+    
+    private Set<Book> getBooksFromAuthorEntity(AuthorEntity authorEntity){
+        Set <Book> books = new HashSet<>();
+        for (BookEntity bookEntity : authorEntity.getBooks()){
+            Book book = new Book();
+            book.setBookId(bookEntity.getBookId());
+            book.setTitle(bookEntity.getTitle());
+            book.setSeries(book.getSeries());
+            book.setYear(book.getYear());
+            book.setGenre(book.getGenre());
+            book.setPages(book.getPages());
+            book.setRead(book.isRead());
+            book.setRating(book.getRating());
+            book.setNotes(book.getNotes());
+            books.add(book);
+        }
+        return books;
     }
 
     public Author findAuthorByName(String name) throws AuthorNotFoundException {
@@ -49,19 +68,7 @@ public class AuthorService {
         }
         AuthorEntity authorEntity = new AuthorEntity();
         authorEntity.setName(newAuthor.getName());
-        authorEntity.setBooks(getBookEntitiesFromAuthor(newAuthor));
         return authorRepository.save(authorEntity);
-    }
-
-    private Set<BookEntity> getBookEntitiesFromAuthor(Author newAuthor) {
-        Set<BookEntity> bookEntities = new HashSet<>();
-        for(Book book : newAuthor.getBooks()){
-            BookEntity bookEntity = new BookEntity();
-            bookEntity.setBookId(book.getBookId());
-            bookEntity.setTitle(book.getTitle());
-            bookEntities.add(bookEntity);
-        }
-        return bookEntities;
     }
 
     public void deleteAuthorById(int id){

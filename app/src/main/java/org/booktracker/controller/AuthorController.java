@@ -1,10 +1,8 @@
 package org.booktracker.controller;
 
 import org.booktracker.entity.AuthorEntity;
-import org.booktracker.entity.BookEntity;
 import org.booktracker.exception.AuthorNotFoundException;
 import org.booktracker.model.Author;
-import org.booktracker.model.Book;
 import org.booktracker.response.AuthorResponse;
 import org.booktracker.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,8 @@ public class AuthorController {
     @GetMapping(value = "/{id}", produces = "application/json")
     public AuthorResponse getBookById(@PathVariable int id) {
         try {
-            return AuthorResponse.from(authorService.findAuthorById(id));
+            Author author = authorService.findAuthorById(id);
+            return AuthorResponse.from(author);
         } catch (AuthorNotFoundException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage(), e);

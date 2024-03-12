@@ -16,8 +16,6 @@ public class Book {
     private String series;
     private int year;
     private String genre;
-    private boolean isAvalaibleInFrench;
-    private boolean isAvalaibleInLibrary;
     private int pages;
     private boolean read;
     private Rating rating;

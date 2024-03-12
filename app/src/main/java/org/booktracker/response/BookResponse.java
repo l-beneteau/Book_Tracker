@@ -17,12 +17,8 @@ public class BookResponse {
     private String series;
     private Integer year;
     private String genre;
-    private boolean french;
-    private boolean library;
     private Integer pages;
     private boolean read;
-    private Date started;
-    private Date ended;
     private Rating rating;
     private String notes;
     
@@ -33,8 +29,6 @@ public class BookResponse {
         bookResponse.series = book.getSeries();
         bookResponse.year = book.getYear();
         bookResponse.genre=book.getGenre();
-        bookResponse.french= book.isAvalaibleInFrench();
-        bookResponse.library=book.isAvalaibleInLibrary();
         bookResponse.pages=book.getPages();
         bookResponse.read=book.isRead();
         bookResponse.rating=book.getRating();
