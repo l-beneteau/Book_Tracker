@@ -16,7 +16,7 @@ import java.util.Set;
 public class AuthorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "author_id")
+    @Column(name = "authorId")
     private Integer authorId;
     private String name;
 

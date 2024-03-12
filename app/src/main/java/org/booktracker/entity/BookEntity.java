@@ -24,7 +24,7 @@ public class BookEntity {
     @JoinTable(
             name = "book_author",
             joinColumns = { @JoinColumn(name = "bookId") },
-            inverseJoinColumns = { @JoinColumn(name = "author_id") }
+            inverseJoinColumns = { @JoinColumn(name = "authorId") }
     )
     Set<org.booktracker.entity.AuthorEntity> authors = new HashSet<>();
     private String series;
