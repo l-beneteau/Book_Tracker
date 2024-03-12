@@ -1,6 +1,10 @@
 package org.booktracker.controller;
 
+import org.booktracker.entity.AuthorEntity;
+import org.booktracker.entity.BookEntity;
 import org.booktracker.exception.AuthorNotFoundException;
+import org.booktracker.model.Author;
+import org.booktracker.model.Book;
 import org.booktracker.response.AuthorResponse;
 import org.booktracker.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +36,10 @@ public class AuthorController {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
+    }
+
+    @PostMapping(value = "/add")
+    public AuthorEntity newAuthor(@RequestBody Author author) {
+        return authorService.saveAuthor(author);
     }
 }

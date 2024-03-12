@@ -11,6 +11,9 @@ import org.booktracker.response.AuthorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 public class AuthorService {
 
@@ -38,5 +41,26 @@ public class AuthorService {
             throw new AuthorNotFoundException(name);
         }
         return getAuthorByEntity(authorEntity);
+    }
+
+    public AuthorEntity saveAuthor(Author newAuthor) {
+        if(authorRepository.findByName(newAuthor.getName()) != null){
+            return authorRepository.findByName(newAuthor.getName());
+        }
+        AuthorEntity authorEntity = new AuthorEntity();
+        authorEntity.setName(newAuthor.getName());
+        authorEntity.setBooks(getBookEntitiesFromAuthor(newAuthor));
+        return authorRepository.save(authorEntity);
+    }
+
+    private Set<BookEntity> getBookEntitiesFromAuthor(Author newAuthor) {
+        Set<BookEntity> bookEntities = new HashSet<>();
+        for(Book book : newAuthor.getBooks()){
+            BookEntity bookEntity = new BookEntity();
+            bookEntity.setBookId(book.getBookId());
+            bookEntity.setTitle(book.getTitle());
+            bookEntities.add(bookEntity);
+        }
+        return bookEntities;
     }
 }

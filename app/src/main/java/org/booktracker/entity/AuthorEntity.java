@@ -22,4 +22,14 @@ public class AuthorEntity {
 
     @ManyToMany(mappedBy = "authors")
     private final Set<BookEntity> books = new HashSet<>();
+
+    public void addBook(BookEntity book){
+        books.add(book);
+    }
+
+    public void setBooks(Set<BookEntity> books){
+        for (BookEntity book : books){
+            addBook(book);
+        }
+    }
 }

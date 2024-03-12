@@ -41,7 +41,7 @@ public class BookController {
     }
 
 
-    @GetMapping(value = "/all", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public List<BookResponse> getAllBooks() {
         List<Book> books = bookService.findAllBooks();
         List<BookResponse> bookResponses = new ArrayList<>();
