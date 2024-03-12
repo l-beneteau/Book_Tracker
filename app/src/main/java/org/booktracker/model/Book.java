@@ -16,12 +16,10 @@ public class Book {
     private String series;
     private int year;
     private String genre;
-    private boolean french;
-    private boolean library;
+    private boolean isAvalaibleInFrench;
+    private boolean isAvalaibleInLibrary;
     private int pages;
     private boolean read;
-    private Date started;
-    private Date ended;
     private Rating rating;
     private String notes;
 

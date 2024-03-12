@@ -33,12 +33,10 @@ public class BookResponse {
         bookResponse.series = book.getSeries();
         bookResponse.year = book.getYear();
         bookResponse.genre=book.getGenre();
-        bookResponse.french= book.isFrench();
-        bookResponse.library=book.isLibrary();
+        bookResponse.french= book.isAvalaibleInFrench();
+        bookResponse.library=book.isAvalaibleInLibrary();
         bookResponse.pages=book.getPages();
         bookResponse.read=book.isRead();
-        bookResponse.started=book.getStarted();
-        bookResponse.ended=book.getEnded();
         bookResponse.rating=book.getRating();
         bookResponse.notes=book.getNotes();
         for(Author author : book.getAuthors()){

@@ -27,12 +27,10 @@ public class BookOfAuthorResponse {
         bookOfAuthorResponse.series = book.getSeries();
         bookOfAuthorResponse.year = book.getYear();
         bookOfAuthorResponse.genre=book.getGenre();
-        bookOfAuthorResponse.french= book.isFrench();
-        bookOfAuthorResponse.library=book.isLibrary();
+        bookOfAuthorResponse.french= book.isAvalaibleInFrench();
+        bookOfAuthorResponse.library=book.isAvalaibleInLibrary();
         bookOfAuthorResponse.pages=book.getPages();
         bookOfAuthorResponse.read=book.isRead();
-        bookOfAuthorResponse.started=book.getStarted();
-        bookOfAuthorResponse.ended=book.getEnded();
         bookOfAuthorResponse.rating=book.getRating();
         bookOfAuthorResponse.notes=book.getNotes();
         return bookOfAuthorResponse;
