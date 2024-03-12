@@ -19,7 +19,7 @@ public class Book {
     private boolean french;
     private boolean library;
     private int pages;
-    private boolean readed;
+    private boolean read;
     private Date started;
     private Date ended;
     private Rating rating;

@@ -30,7 +30,7 @@ public class BookOfAuthorResponse {
         bookOfAuthorResponse.french= book.isFrench();
         bookOfAuthorResponse.library=book.isLibrary();
         bookOfAuthorResponse.pages=book.getPages();
-        bookOfAuthorResponse.read=book.isReaded();
+        bookOfAuthorResponse.read=book.isRead();
         bookOfAuthorResponse.started=book.getStarted();
         bookOfAuthorResponse.ended=book.getEnded();
         bookOfAuthorResponse.rating=book.getRating();

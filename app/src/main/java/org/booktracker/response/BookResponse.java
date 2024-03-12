@@ -36,7 +36,7 @@ public class BookResponse {
         bookResponse.french= book.isFrench();
         bookResponse.library=book.isLibrary();
         bookResponse.pages=book.getPages();
-        bookResponse.read=book.isReaded();
+        bookResponse.read=book.isRead();
         bookResponse.started=book.getStarted();
         bookResponse.ended=book.getEnded();
         bookResponse.rating=book.getRating();

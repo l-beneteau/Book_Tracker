@@ -33,7 +33,7 @@ public class BookEntity {
     private boolean french;
     private boolean library;
     private int pages;
-    private boolean readed;
+    private boolean read;
     private Date started;
     private Date ended;
     @Convert(converter = org.booktracker.entity.RatingConverter.class)
