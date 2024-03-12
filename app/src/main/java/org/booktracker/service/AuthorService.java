@@ -6,12 +6,15 @@ import org.booktracker.exception.AuthorNotFoundException;
 import org.booktracker.exception.BookNotFoundException;
 import org.booktracker.model.Author;
 import org.booktracker.model.Book;
+import org.booktracker.parameter.AuthorParameter;
 import org.booktracker.repository.AuthorRepository;
 import org.booktracker.response.AuthorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -54,18 +57,20 @@ public class AuthorService {
         return books;
     }
 
-    public Author findAuthorByName(String name) throws AuthorNotFoundException {
-        AuthorEntity authorEntity = authorRepository.findByName(name);
-        if (authorEntity == null){
-            throw new AuthorNotFoundException(name);
+
+    public List<Author> findAuthors(AuthorParameter authorParameter) throws AuthorNotFoundException {
+        List<AuthorEntity> authorEntities = authorRepository.find(authorParameter.getName());
+        if(authorEntities.isEmpty()){
+            throw new AuthorNotFoundException(authorParameter.getName());
         }
-        return getAuthorByEntity(authorEntity);
+        List<Author> authors = new ArrayList<>();
+        for (AuthorEntity authorEntity : authorEntities){
+            authors.add(getAuthorByEntity(authorEntity));
+        }
+        return authors;
     }
 
     public AuthorEntity saveAuthor(Author newAuthor) {
-        if(authorRepository.findByName(newAuthor.getName()) != null){
-            return authorRepository.findByName(newAuthor.getName());
-        }
         AuthorEntity authorEntity = new AuthorEntity();
         authorEntity.setName(newAuthor.getName());
         return authorRepository.save(authorEntity);
