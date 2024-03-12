@@ -1,18 +1,17 @@
-package org.booktracker.model;
+package org.booktracker.parameter;
 
-import lombok.*;
+import lombok.Data;
+import org.booktracker.model.Genre;
+import org.booktracker.model.Rating;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@NoArgsConstructor
-@Getter
-@Setter
-public class Book {
+@Data
+public class BookParameter {
     private Integer bookId;
     private String title;
-    Set<Author> authors = new HashSet<>();
+    Set<Integer> authors = new HashSet<>();
     private String series;
     private int year;
     private Genre genre;
@@ -20,5 +19,4 @@ public class Book {
     private boolean read;
     private Rating rating;
     private String notes;
-
 }

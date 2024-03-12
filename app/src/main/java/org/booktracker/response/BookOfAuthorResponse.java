@@ -2,6 +2,7 @@ package org.booktracker.response;
 
 import lombok.Data;
 import org.booktracker.model.Book;
+import org.booktracker.model.Genre;
 import org.booktracker.model.Rating;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ public class BookOfAuthorResponse {
     private String title;
     private String series;
     private Integer year;
-    private String genre;
+    private Genre genre;
     private Integer pages;
     private boolean read;
     private Rating rating;

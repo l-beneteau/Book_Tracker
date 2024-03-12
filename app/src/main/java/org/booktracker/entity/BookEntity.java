@@ -1,6 +1,7 @@
 package org.booktracker.entity;
 
 
+import org.booktracker.model.Genre;
 import org.booktracker.model.Rating;
 import jakarta.persistence.*;
 
@@ -29,7 +30,8 @@ public class BookEntity {
     Set<org.booktracker.entity.AuthorEntity> authors = new HashSet<>();
     private String series;
     private int year;
-    private String genre;
+    @Convert(converter = org.booktracker.entity.GenreConverter.class)
+    private Genre genre;
     private boolean french;
     private boolean library;
     private int pages;
