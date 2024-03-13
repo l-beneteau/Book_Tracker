@@ -47,15 +47,11 @@ public class BookController {
         return bookResponses;
     }
 
-//    @PostMapping(value = "/add")
-//    BookEntity newBook(@RequestBody Book book) {
-//        return bookService.saveBook(book);
-//    }
 
     @PostMapping(value = "/add")
-    BookEntity newBook(@RequestBody BookParameter book) {
+    BookResponse newBook(@RequestBody BookParameter book) {
         try{
-            return bookService.saveBook(book);
+            return BookResponse.from(bookService.saveBook(book));
         }
         catch(AuthorNotFoundException e){
             throw new ResponseStatusException(

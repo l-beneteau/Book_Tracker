@@ -3,6 +3,8 @@ package org.booktracker.response;
 
 import lombok.Data;
 import lombok.Getter;
+import org.booktracker.entity.AuthorEntity;
+import org.booktracker.entity.BookEntity;
 import org.booktracker.model.Author;
 import org.booktracker.model.Book;
 
@@ -20,6 +22,16 @@ public class AuthorResponse {
         authorResponse.authorId = author.getAuthorId();
         authorResponse.name = author.getName();
         for (Book book : author.getBooks()){
+            authorResponse.books.add(BookOfAuthorResponse.from(book));
+        }
+        return authorResponse;
+    }
+
+    public static AuthorResponse from (AuthorEntity author){
+        AuthorResponse authorResponse = new AuthorResponse();
+        authorResponse.authorId = author.getAuthorId();
+        authorResponse.name = author.getName();
+        for (BookEntity book : author.getBooks()){
             authorResponse.books.add(BookOfAuthorResponse.from(book));
         }
         return authorResponse;

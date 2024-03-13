@@ -1,6 +1,8 @@
 package org.booktracker.response;
 
 import lombok.Data;
+import org.booktracker.entity.AuthorEntity;
+import org.booktracker.entity.BookEntity;
 import org.booktracker.model.Author;
 import org.booktracker.model.Book;
 import org.booktracker.model.Genre;
@@ -38,6 +40,21 @@ public class BookResponse {
             bookResponse.authors.add(AuthorOfBookResponse.from(author));
         }
         return bookResponse;
-        
+    }
+    public static BookResponse from(BookEntity book){
+        BookResponse bookResponse = new BookResponse();
+        bookResponse.bookId = book.getBookId();
+        bookResponse.title = book.getTitle();
+        bookResponse.series = book.getSeries();
+        bookResponse.year = book.getYear();
+        bookResponse.genre=book.getGenre();
+        bookResponse.pages=book.getPages();
+        bookResponse.read=book.isRead();
+        bookResponse.rating=book.getRating();
+        bookResponse.notes=book.getNotes();
+        for(AuthorEntity author : book.getAuthors()){
+            bookResponse.authors.add(AuthorOfBookResponse.from(author));
+        }
+        return bookResponse;
     }
 }

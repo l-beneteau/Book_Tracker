@@ -39,11 +39,8 @@ public class BookService {
 //    }
 
     public List<Book> findBooks(BookParameter bookParameter) throws BookNotFoundException {
-//        List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
-//                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getPages(), bookParameter.isRead(),
-//                bookParameter.getRating());
         List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
-                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.isRead(), bookParameter.getRating());
+                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getRead(), bookParameter.getRating());
         if (bookEntities.isEmpty()){
             throw new BookNotFoundException(bookParameter);
         }
@@ -92,7 +89,7 @@ public class BookService {
         bookEntity.setYear(bookParameter.getYear());
         bookEntity.setGenre(bookParameter.getGenre());
         bookEntity.setPages(bookParameter.getPages());
-        bookEntity.setRead(bookParameter.isRead());
+        bookEntity.setRead(bookParameter.getRead());
         bookEntity.setRating(bookParameter.getRating());
         bookEntity.setNotes(bookParameter.getNotes());
         return bookRepository.save(bookEntity);

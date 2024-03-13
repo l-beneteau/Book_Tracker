@@ -16,7 +16,7 @@ public class BookParameter {
     private int year;
     private Genre genre;
     private int pages;
-    private boolean read;
+    private Boolean read;
     private Rating rating;
     private String notes;
 }

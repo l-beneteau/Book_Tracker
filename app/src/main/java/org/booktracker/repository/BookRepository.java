@@ -20,6 +20,6 @@ public interface BookRepository extends CrudRepository<BookEntity, Integer> {
             "(:read is null or b.read = :read) and " +
             "(:rating is null or b.rating = :rating)")
     List<BookEntity> find (@Param("title") String title, @Param("series") String series, @Param("year") int year,
-                           @Param("genre") Genre genre, @Param("read") boolean read, @Param("rating") Rating rating);
+                           @Param("genre") Genre genre, @Param("read") Boolean read, @Param("rating") Rating rating);
 
 }

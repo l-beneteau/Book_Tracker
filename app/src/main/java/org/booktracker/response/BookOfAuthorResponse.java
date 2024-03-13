@@ -1,6 +1,7 @@
 package org.booktracker.response;
 
 import lombok.Data;
+import org.booktracker.entity.BookEntity;
 import org.booktracker.model.Book;
 import org.booktracker.model.Genre;
 import org.booktracker.model.Rating;
@@ -20,6 +21,20 @@ public class BookOfAuthorResponse {
     private String notes;
 
     public static BookOfAuthorResponse from(Book book) {
+        BookOfAuthorResponse bookOfAuthorResponse = new BookOfAuthorResponse();
+        bookOfAuthorResponse.bookId = book.getBookId();
+        bookOfAuthorResponse.title = book.getTitle();
+        bookOfAuthorResponse.series = book.getSeries();
+        bookOfAuthorResponse.year = book.getYear();
+        bookOfAuthorResponse.genre=book.getGenre();
+        bookOfAuthorResponse.pages=book.getPages();
+        bookOfAuthorResponse.read=book.isRead();
+        bookOfAuthorResponse.rating=book.getRating();
+        bookOfAuthorResponse.notes=book.getNotes();
+        return bookOfAuthorResponse;
+    }
+
+    public static BookOfAuthorResponse from(BookEntity book) {
         BookOfAuthorResponse bookOfAuthorResponse = new BookOfAuthorResponse();
         bookOfAuthorResponse.bookId = book.getBookId();
         bookOfAuthorResponse.title = book.getTitle();
