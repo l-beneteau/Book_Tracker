@@ -4,24 +4,38 @@ import ch.qos.logback.classic.Level;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.ErrorLoggingFilter;
 import io.restassured.filter.log.RequestLoggingFilter;
+import lombok.Data;
 import org.booktracker.Application;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.sql.DataSource;
+import java.sql.SQLException;
+
+
+@Data
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = Application.class)
 public class BaseIntegrationTest {
 
+    @Autowired
+    private DataSource dataSource;
+
+
     @LocalServerPort
     int port;
 
     @BeforeAll
-    public void setup() {
+    public void setup() throws SQLException {
         // Ref https://github.com/rest-assured/rest-assured/wiki/Usage
         RestAssured.basePath = "";
 
@@ -39,5 +53,9 @@ public class BaseIntegrationTest {
         ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(
                 ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
         root.setLevel(Level.INFO);
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        ScriptUtils.executeSqlScript(jdbcTemplate.getDataSource().getConnection(),
+                new ClassPathResource("booktracker-test-truncate.sql"));
     }
 }
