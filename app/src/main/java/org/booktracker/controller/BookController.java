@@ -1,5 +1,6 @@
 package org.booktracker.controller;
 
+import org.booktracker.exception.AuthorNotFoundException;
 import org.booktracker.exception.BookNotFoundException;
 import org.booktracker.model.Book;
 import org.booktracker.entity.BookEntity;
@@ -46,20 +47,21 @@ public class BookController {
         return bookResponses;
     }
 
-
-//    @GetMapping(produces = "application/json")
-//    public List<BookResponse> getAllBooks() {
-//        List<Book> books = bookService.findAllBooks();
-//        List<BookResponse> bookResponses = new ArrayList<>();
-//        for (Book book : books){
-//            bookResponses.add(BookResponse.from(book));
-//        }
-//        return bookResponses;
+//    @PostMapping(value = "/add")
+//    BookEntity newBook(@RequestBody Book book) {
+//        return bookService.saveBook(book);
 //    }
 
     @PostMapping(value = "/add")
-    BookEntity newBook(@RequestBody Book book) {
-        return bookService.saveBook(book);
+    BookEntity newBook(@RequestBody BookParameter book) {
+        try{
+            return bookService.saveBook(book);
+        }
+        catch(AuthorNotFoundException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, e.getMessage(), e);
+        }
+
     }
 
     @DeleteMapping("/{id}")

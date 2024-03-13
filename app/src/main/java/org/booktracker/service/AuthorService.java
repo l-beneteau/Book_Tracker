@@ -45,18 +45,17 @@ public class AuthorService {
             Book book = new Book();
             book.setBookId(bookEntity.getBookId());
             book.setTitle(bookEntity.getTitle());
-            book.setSeries(book.getSeries());
-            book.setYear(book.getYear());
-            book.setGenre(book.getGenre());
-            book.setPages(book.getPages());
-            book.setRead(book.isRead());
-            book.setRating(book.getRating());
-            book.setNotes(book.getNotes());
+            book.setSeries(bookEntity.getSeries());
+            book.setYear(bookEntity.getYear());
+            book.setGenre(bookEntity.getGenre());
+            book.setPages(bookEntity.getPages());
+            book.setRead(bookEntity.isRead());
+            book.setRating(bookEntity.getRating());
+            book.setNotes(bookEntity.getNotes());
             books.add(book);
         }
         return books;
     }
-
 
     public List<Author> findAuthors(AuthorParameter authorParameter) throws AuthorNotFoundException {
         List<AuthorEntity> authorEntities = authorRepository.find(authorParameter.getName());
@@ -78,5 +77,9 @@ public class AuthorService {
 
     public void deleteAuthorById(int id){
         authorRepository.deleteById(id);
+    }
+
+    public AuthorEntity findAuthorEntityById(int authorId) {
+        return authorRepository.findById(authorId);
     }
 }

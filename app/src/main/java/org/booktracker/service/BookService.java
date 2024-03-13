@@ -1,5 +1,6 @@
 package org.booktracker.service;
 
+import org.booktracker.exception.AuthorNotFoundException;
 import org.booktracker.exception.BookNotFoundException;
 import org.booktracker.model.Author;
 import org.booktracker.model.Book;
@@ -17,6 +18,9 @@ public class BookService {
 
     @Autowired
     BookRepository bookRepository;
+
+    @Autowired
+    AuthorService authorService;
 
     public Book findBookById(int id) throws BookNotFoundException{
         BookEntity bookEntity = bookRepository.findById(id);
@@ -41,7 +45,7 @@ public class BookService {
         List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
                 bookParameter.getYear(), bookParameter.getGenre(), bookParameter.isRead(), bookParameter.getRating());
         if (bookEntities.isEmpty()){
-            throw new BookNotFoundException("Book");
+            throw new BookNotFoundException(bookParameter);
         }
         List<Book> books = new ArrayList<>();
         for(BookEntity bookEntity : bookEntities){
@@ -55,17 +59,15 @@ public class BookService {
         book.setBookId(bookEntity.getBookId());
         book.setTitle(bookEntity.getTitle());
         book.setAuthors(getAuthorsFromBookEntity(bookEntity));
+        book.setSeries(bookEntity.getSeries());
+        book.setYear(bookEntity.getYear());
+        book.setGenre(bookEntity.getGenre());
+        book.setPages(bookEntity.getPages());
+        book.setRead(bookEntity.isRead());
+        book.setRating(bookEntity.getRating());
+        book.setNotes(bookEntity.getNotes());
         return book;
     }
-
-//    public List<Book> findAllBooks(){
-//       List<Book> books = new ArrayList<>();
-//       Iterable<BookEntity> bookEntities = bookRepository.findAll();
-//       for (BookEntity bookEntity : bookEntities){
-//           books.add(getBookFromEntity(bookEntity));
-//       }
-//       return books;
-//    }
 
     private Set<Author> getAuthorsFromBookEntity(BookEntity bookEntity){
         Set<Author> authors = new HashSet<>();
@@ -79,30 +81,31 @@ public class BookService {
     }
 
 
-    public BookEntity saveBook(Book newBook) {
-        if(bookRepository.findByTitle(newBook.getTitle()) != null){
-            return bookRepository.findByTitle(newBook.getTitle());
+    public BookEntity saveBook(BookParameter bookParameter) throws AuthorNotFoundException {
+        if(bookRepository.findByTitle(bookParameter.getTitle()) != null){
+            return bookRepository.findByTitle(bookParameter.getTitle());
         }
         BookEntity bookEntity = new BookEntity();
-        bookEntity.setTitle(newBook.getTitle());
-        bookEntity.setAuthors(getAuthorEntitiesFromBook(newBook));
+        bookEntity.setTitle(bookParameter.getTitle());
+        bookEntity.setAuthors(getAuthorEntitiesFromBook(bookParameter));
+        bookEntity.setSeries(bookParameter.getSeries());
+        bookEntity.setYear(bookParameter.getYear());
+        bookEntity.setGenre(bookParameter.getGenre());
+        bookEntity.setPages(bookParameter.getPages());
+        bookEntity.setRead(bookParameter.isRead());
+        bookEntity.setRating(bookParameter.getRating());
+        bookEntity.setNotes(bookParameter.getNotes());
         return bookRepository.save(bookEntity);
     }
 
-    private Set<AuthorEntity> getAuthorEntitiesFromBook(Book book){
+    private Set<AuthorEntity> getAuthorEntitiesFromBook(BookParameter bookParameter) throws AuthorNotFoundException {
         Set<AuthorEntity> authorEntities = new HashSet<>();
-        for(Author author : book.getAuthors()) {
-            AuthorEntity authorEntity = getAuthorEntityFromAuthor(author);
-            authorEntities.add(authorEntity);
-        }
+        for (int authorId : bookParameter.getAuthors())
+            authorEntities.add(authorService.findAuthorEntityById(authorId));
         return authorEntities;
     }
 
-    private static AuthorEntity getAuthorEntityFromAuthor(Author author) {
-        AuthorEntity authorEntity = new AuthorEntity();
-        authorEntity.setName(author.getName());
-        return authorEntity;
-    }
+
 
     public void deleteBookById(int id){
         bookRepository.deleteById(id);
