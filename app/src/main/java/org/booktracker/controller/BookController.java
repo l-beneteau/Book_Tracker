@@ -3,7 +3,6 @@ package org.booktracker.controller;
 import org.booktracker.exception.AuthorNotFoundException;
 import org.booktracker.exception.BookNotFoundException;
 import org.booktracker.model.Book;
-import org.booktracker.entity.BookEntity;
 import org.booktracker.parameter.BookParameter;
 import org.booktracker.response.BookResponse;
 import org.springframework.beans.factory.annotation.Autowired;

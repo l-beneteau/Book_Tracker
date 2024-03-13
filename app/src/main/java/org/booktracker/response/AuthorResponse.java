@@ -2,7 +2,6 @@ package org.booktracker.response;
 
 
 import lombok.Data;
-import lombok.Getter;
 import org.booktracker.entity.AuthorEntity;
 import org.booktracker.entity.BookEntity;
 import org.booktracker.model.Author;

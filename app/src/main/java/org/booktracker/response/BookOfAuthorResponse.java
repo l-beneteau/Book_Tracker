@@ -6,8 +6,6 @@ import org.booktracker.model.Book;
 import org.booktracker.model.Genre;
 import org.booktracker.model.Rating;
 
-import java.util.Date;
-
 @Data
 public class BookOfAuthorResponse {
     private Integer bookId;

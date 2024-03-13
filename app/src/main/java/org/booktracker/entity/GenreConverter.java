@@ -2,7 +2,6 @@ package org.booktracker.entity;
 
 import jakarta.persistence.AttributeConverter;
 import org.booktracker.model.Genre;
-import org.booktracker.model.Rating;
 
 public class GenreConverter implements AttributeConverter<Genre, String> {
     @Override

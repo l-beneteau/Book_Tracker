@@ -8,7 +8,6 @@ import org.booktracker.model.Book;
 import org.booktracker.model.Genre;
 import org.booktracker.model.Rating;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 

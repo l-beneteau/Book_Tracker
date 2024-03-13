@@ -29,15 +29,6 @@ public class BookService {
         }
         return getBookFromEntity(bookEntity);
     }
-
-//    public Book findBookByTitle(String title) throws BookNotFoundException{
-//        BookEntity bookEntity = bookRepository.findByTitle(title);
-//        if (bookEntity == null){
-//            throw new BookNotFoundException(title);
-//        }
-//        return getBookFromEntity(bookEntity);
-//    }
-
     public List<Book> findBooks(BookParameter bookParameter) throws BookNotFoundException {
         List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
                 bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getRead(), bookParameter.getRating());
