@@ -84,7 +84,9 @@ public class BookService {
         bookEntity.setYear(bookParameter.getYear());
         bookEntity.setGenre(bookParameter.getGenre());
         bookEntity.setPages(bookParameter.getPages());
-        bookEntity.setRead(bookParameter.getRead());
+        if(bookParameter.getRead() != null){
+            bookEntity.setRead(bookParameter.getRead());
+        }
         bookEntity.setRating(bookParameter.getRating());
         bookEntity.setNotes(bookParameter.getNotes());
         return bookRepository.save(bookEntity);
