@@ -44,7 +44,6 @@ public class BookTest extends BaseIntegrationTest {
                     "rating" : "WONDERFUL"
                 }
                 """;
-        String json =
                 given()
                         .contentType(ContentType.JSON)
                         .body(bodyBook)
@@ -62,8 +61,7 @@ public class BookTest extends BaseIntegrationTest {
                         .body("genre", equalTo("FANTASY"))
                         .body("pages", equalTo(400))
                         .body("read", equalTo(true))
-                        .body("rating", equalTo("WONDERFUL"))
-                        .toString();
+                        .body("rating", equalTo("WONDERFUL"));
 
     }
 
@@ -82,15 +80,13 @@ public class BookTest extends BaseIntegrationTest {
                     "rating" : "WONDERFUL"
                 }
                 """;
-        String json =
                 given()
                         .contentType(ContentType.JSON)
                         .body(body)
                         .when()
                         .post("/book/add")
                         .then()
-                        .statusCode(400)
-                        .toString();
+                        .statusCode(400);
 
     }
 
@@ -108,17 +104,126 @@ public class BookTest extends BaseIntegrationTest {
                     "rating" : "WONDERFUL"
                 }
                 """;
-        String json =
                 given()
                         .contentType(ContentType.JSON)
                         .body(body)
                         .when()
                         .post("/book/add")
                         .then()
-                        .statusCode(404)
-                        .toString();
+                        .statusCode(404);
 
     }
+
+    @Test
+    public void testGetBookById(){
+        booksSetup();
+    }
+
+    public void booksSetup(){
+        String bodyAuthor1 = """
+                {
+                "name" : "Robin Hobb"
+                }
+                """;
+        given()
+                .contentType(ContentType.JSON)
+                .body(bodyAuthor1)
+                .when()
+                .post("/author/add");
+
+        String bodyAuthor2 = """
+                {
+                "name" : "Christian Grataloup"
+                }
+                """;
+        given()
+                .contentType(ContentType.JSON)
+                .body(bodyAuthor2)
+                .when()
+                .post("/author/add");
+        String bodyAuthor3 = """
+                {
+                "name" : "Charlotte Becquart-Rousset"
+                }
+                """;
+        given()
+                .contentType(ContentType.JSON)
+                .body(bodyAuthor3)
+                .when()
+                .post("/author/add");
+
+
+
+        String bodyBook1 = """
+                {
+                    "title" : "Assassin's Apprentice",
+                    "series" : "Farseer trilogy",
+                    "authors":[1],
+                    "year" : 1995,
+                    "genre" : "FANTASY",
+                    "pages" : 400,
+                    "read" : true,
+                    "rating" : "WONDERFUL"
+                }
+                """;
+        given()
+                .contentType(ContentType.JSON)
+                .body(bodyBook1)
+                .when()
+                .post("/book/add")
+                .then();
+        String bodyBook2 = """
+                {
+                    "title" : "Royal Assassin",
+                    "series" : "Farseer trilogy",
+                    "authors":[1],
+                    "year" : 1996,
+                    "genre" : "FANTASY",
+                    "pages" : 580,
+                    "read" : true,
+                    "rating" : "GOOD"
+                }""";
+        given()
+                .contentType(ContentType.JSON)
+                .body(bodyBook2)
+                .when()
+                .post("/book/add")
+                .then();
+        String bodyBook3 = """
+                {
+                    "title" : "Atlas historique de la terre",
+                    "authors":[2,3]
+                    "year" : 2022,
+                    "genre" : "VULGARISATION",
+                    "pages" : 337,
+                    "read" : true,
+                    "rating" : "WONDERFUL",
+                }""";
+        given()
+                .contentType(ContentType.JSON)
+                .body(bodyBook3)
+                .when()
+                .post("/book/add")
+                .then();
+        String bodyBook4 = """
+                {
+                    "title" : "Assassin's Quest",
+                    "series" : "Farseer trilogy",
+                    "authors":[1],
+                    "year" : 1997,
+                    "genre" : "FANTASY",
+                    "pages" : 742,
+                    "read" : false,
+                }""";
+        given()
+                .contentType(ContentType.JSON)
+                .body(bodyBook4)
+                .when()
+                .post("/book/add")
+                .then();
+
+    }
+
 
 
 
