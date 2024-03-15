@@ -32,12 +32,8 @@ public class BookEntity {
     private int year;
     @Convert(converter = org.booktracker.entity.GenreConverter.class)
     private Genre genre;
-    private boolean french;
-    private boolean library;
     private int pages;
     private boolean read;
-    private Date started;
-    private Date ended;
     @Convert(converter = org.booktracker.entity.RatingConverter.class)
     private Rating rating;
     private String notes;

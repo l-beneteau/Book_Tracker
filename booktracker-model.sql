@@ -1,30 +1,26 @@
 CREATE TABLE author(
-	authorId SERIAL,
+	author_id SERIAL,
 	name Varchar(100),
-	PRIMARY KEY (authorId)
+	PRIMARY KEY (author_id)
 );
 	
 CREATE TABLE book (
-	bookId SERIAL,
+	book_id SERIAL,
 	title Varchar(100) not null,
 	series Varchar(100),
 	year Int,
 	genre Varchar(50),
-	french Boolean,
-	library Boolean,
 	pages Int,
 	read Boolean,
-	started Date,
-	ended Date,
-	rating Int,
+	rating Varchar(20),
 	notes Varchar(1000),
-	PRIMARY KEY (bookId)
+	PRIMARY KEY (book_id)
 );
 
 CREATE TABLE book_author (
-	bookId Int not null,
-	authorId Int not null,
-	PRIMARY KEY (bookId, authorId),
-	FOREIGN KEY (bookId) REFERENCES book(bookId),
-	FOREIGN KEY (authorId) REFERENCES author(authorId)
+	book_id Int not null,
+	author_id Int not null,
+	PRIMARY KEY (book_id, authorId),
+	FOREIGN KEY (book_id) REFERENCES book(book_id),
+	FOREIGN KEY (author_id) REFERENCES author(author_id)
 );

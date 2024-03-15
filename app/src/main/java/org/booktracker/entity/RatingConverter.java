@@ -5,30 +5,30 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter
-public class RatingConverter implements AttributeConverter<Rating, Integer> {
+public class RatingConverter implements AttributeConverter<Rating, String> {
 
     @Override
-    public Integer convertToDatabaseColumn(Rating attribute) {
+    public String convertToDatabaseColumn(Rating attribute) {
         if (attribute == null)
             return null;
         return switch (attribute) {
-            case UNFINISHED -> 0;
-            case MEH -> 1;
-            case GOOD -> 2;
-            case WONDERFUL -> 3;
+            case UNFINISHED -> "UNFINISHED";
+            case MEH -> "MEH";
+            case GOOD -> "GOOD";
+            case WONDERFUL -> "WONDERFUL";
             default -> throw new IllegalArgumentException(attribute + " not supported.");
         };
     }
 
     @Override
-    public Rating convertToEntityAttribute(Integer dbData) {
+    public Rating convertToEntityAttribute(String dbData) {
         if (dbData == null)
             return null;
         return switch(dbData) {
-            case 0 -> Rating.UNFINISHED;
-            case 1 -> Rating.MEH;
-            case 2 -> Rating.GOOD;
-            case 3 -> Rating.WONDERFUL;
+            case "UNFINISHED" -> Rating.UNFINISHED;
+            case "MEH" -> Rating.MEH;
+            case "GOOD" -> Rating.GOOD;
+            case "WONDERFUL" -> Rating.WONDERFUL;
             default -> throw new IllegalArgumentException(dbData + " not supported.");
         };
     }

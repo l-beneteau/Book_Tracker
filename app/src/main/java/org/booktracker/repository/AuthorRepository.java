@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AuthorRepository extends CrudRepository<AuthorEntity, Integer> {
-    AuthorEntity findById(int id);
+    AuthorEntity findById(int authorId);
     @Query("SELECT a FROM AuthorEntity a WHERE (:name is null or a.name = :name)")
     List<AuthorEntity> find(@Param("name") String name);
 }

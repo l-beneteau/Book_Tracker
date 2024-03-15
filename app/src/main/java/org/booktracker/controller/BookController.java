@@ -2,6 +2,7 @@ package org.booktracker.controller;
 
 import org.booktracker.exception.AuthorNotFoundException;
 import org.booktracker.exception.BookNotFoundException;
+import org.booktracker.exception.NoAuthorException;
 import org.booktracker.model.Book;
 import org.booktracker.parameter.BookParameter;
 import org.booktracker.response.BookResponse;
@@ -55,6 +56,9 @@ public class BookController {
         catch(AuthorNotFoundException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage(), e);
+        } catch (NoAuthorException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }
 
     }

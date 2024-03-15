@@ -2,6 +2,7 @@ package org.booktracker.service;
 
 import org.booktracker.exception.AuthorNotFoundException;
 import org.booktracker.exception.BookNotFoundException;
+import org.booktracker.exception.NoAuthorException;
 import org.booktracker.model.Author;
 import org.booktracker.model.Book;
 import org.booktracker.entity.AuthorEntity;
@@ -69,12 +70,15 @@ public class BookService {
     }
 
 
-    public BookEntity saveBook(BookParameter bookParameter) throws AuthorNotFoundException {
+    public BookEntity saveBook(BookParameter bookParameter) throws AuthorNotFoundException, NoAuthorException {
         if(bookRepository.findByTitle(bookParameter.getTitle()) != null){
             return bookRepository.findByTitle(bookParameter.getTitle());
         }
         BookEntity bookEntity = new BookEntity();
         bookEntity.setTitle(bookParameter.getTitle());
+        if(getAuthorEntitiesFromBook(bookParameter).isEmpty()){
+            throw new NoAuthorException();
+        }
         bookEntity.setAuthors(getAuthorEntitiesFromBook(bookParameter));
         bookEntity.setSeries(bookParameter.getSeries());
         bookEntity.setYear(bookParameter.getYear());
