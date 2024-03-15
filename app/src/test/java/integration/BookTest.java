@@ -117,7 +117,26 @@ public class BookTest extends BaseIntegrationTest {
     @Test
     public void testGetBookById(){
         booksSetup();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/book/2")
+                .then()
+                .statusCode(200)
+                .body("bookId", equalTo(2))
+                .body("title", equalTo("Royal Assassin"))
+                .body("series", equalTo("Farseer trilogy"))
+                .body("authors[0].authorId", equalTo(1))
+                .body("authors[0].name", equalTo("Robin Hobb"))
+                .body("year", equalTo(1996))
+                .body("genre", equalTo("FANTASY"))
+                .body("pages", equalTo(580))
+                .body("read", equalTo(true))
+                .body("rating", equalTo("GOOD"));
     }
+
+
+
 
     public void booksSetup(){
         String bodyAuthor1 = """
