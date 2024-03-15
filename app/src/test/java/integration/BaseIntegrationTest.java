@@ -7,6 +7,7 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import lombok.Data;
 import org.booktracker.Application;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class BaseIntegrationTest {
     @LocalServerPort
     int port;
 
-    @BeforeAll
+    @BeforeEach
     public void setup() throws SQLException {
         // Ref https://github.com/rest-assured/rest-assured/wiki/Usage
         RestAssured.basePath = "";
