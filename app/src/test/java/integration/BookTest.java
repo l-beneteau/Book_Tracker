@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.sql.DataSource;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -135,8 +134,77 @@ public class BookTest extends BaseIntegrationTest {
                 .body("rating", equalTo("GOOD"));
     }
 
+    @Test
+    public void testGetBooksByTitle(){
+        booksSetup();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/book?title=Royal Assassin")
+                .then()
+                .statusCode(200)
+                .body("bookId", hasSize(1))
+                .body("bookId[0]", equalTo(2));
+    }
 
+    @Test
+    public void testGetBooksBySeries(){
+        booksSetup();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/book?series=Farseer trilogy")
+                .then()
+                .statusCode(200)
+                .body("bookId", hasSize(3))
+                .body("bookId[0]", equalTo(1))
+                .body("bookId[1]", equalTo(2))
+                .body("bookId[2]", equalTo(4));
+    }
 
+    @Test
+    public void testGetBooksByGenre(){
+        booksSetup();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/book?genre=FANTASY")
+                .then()
+                .statusCode(200)
+                .body("bookId", hasSize(3))
+                .body("bookId[0]", equalTo(1))
+                .body("bookId[1]", equalTo(2))
+                .body("bookId[2]", equalTo(4));
+    }
+
+    @Test
+    public void testGetReadBooks(){
+        booksSetup();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/book?read=true")
+                .then()
+                .statusCode(200)
+                .body("bookId", hasSize(3))
+                .body("bookId[0]", equalTo(1))
+                .body("bookId[1]", equalTo(2))
+                .body("bookId[2]", equalTo(3));
+    }
+
+    @Test
+    public void testGetBooksByRating(){
+        booksSetup();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/book?rating=WONDERFUL")
+                .then()
+                .statusCode(200)
+                .body("bookId", hasSize(2))
+                .body("bookId[0]", equalTo(1))
+                .body("bookId[1]", equalTo(3));
+    }
 
     public void booksSetup(){
         String bodyAuthor1 = """
@@ -211,12 +279,12 @@ public class BookTest extends BaseIntegrationTest {
         String bodyBook3 = """
                 {
                     "title" : "Atlas historique de la terre",
-                    "authors":[2,3]
+                    "authors":[2,3],
                     "year" : 2022,
-                    "genre" : "VULGARISATION",
+                    "genre" : "POPULARIZATION",
                     "pages" : 337,
                     "read" : true,
-                    "rating" : "WONDERFUL",
+                    "rating" : "WONDERFUL"
                 }""";
         given()
                 .contentType(ContentType.JSON)
@@ -232,7 +300,7 @@ public class BookTest extends BaseIntegrationTest {
                     "year" : 1997,
                     "genre" : "FANTASY",
                     "pages" : 742,
-                    "read" : false,
+                    "read" : false
                 }""";
         given()
                 .contentType(ContentType.JSON)
