@@ -1,16 +1,11 @@
 package integration;
 
-import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.ReadContext;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import lombok.Data;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 
 public class AuthorTest extends BaseIntegrationTest {

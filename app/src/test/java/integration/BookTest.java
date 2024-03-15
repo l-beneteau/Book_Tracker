@@ -1,19 +1,12 @@
 package integration;
 
-import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.ReadContext;
 import io.restassured.http.ContentType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.sql.DataSource;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -43,24 +36,24 @@ public class BookTest extends BaseIntegrationTest {
                     "rating" : "WONDERFUL"
                 }
                 """;
-                given()
-                        .contentType(ContentType.JSON)
-                        .body(bodyBook)
-                        .when()
-                        .post("/book/add")
-                        .then()
-                        .statusCode(200)
-                        .header("Content-Type", "application/json")
-                        .body("bookId", equalTo(1))
-                        .body("title", equalTo("Assassin's Apprentice"))
-                        .body("series", equalTo("Farseer trilogy"))
-                        .body("authors[0].authorId", equalTo(1))
-                        .body("authors[0].name", equalTo("Robin Hobb"))
-                        .body("year", equalTo(1995))
-                        .body("genre", equalTo("FANTASY"))
-                        .body("pages", equalTo(400))
-                        .body("read", equalTo(true))
-                        .body("rating", equalTo("WONDERFUL"));
+        given()
+                .contentType(ContentType.JSON)
+                .body(bodyBook)
+                .when()
+                .post("/book/add")
+                .then()
+                .statusCode(200)
+                .header("Content-Type", "application/json")
+                .body("bookId", equalTo(1))
+                .body("title", equalTo("Assassin's Apprentice"))
+                .body("series", equalTo("Farseer trilogy"))
+                .body("authors[0].authorId", equalTo(1))
+                .body("authors[0].name", equalTo("Robin Hobb"))
+                .body("year", equalTo(1995))
+                .body("genre", equalTo("FANTASY"))
+                .body("pages", equalTo(400))
+                .body("read", equalTo(true))
+                .body("rating", equalTo("WONDERFUL"));
 
     }
 
@@ -79,13 +72,13 @@ public class BookTest extends BaseIntegrationTest {
                     "rating" : "WONDERFUL"
                 }
                 """;
-                given()
-                        .contentType(ContentType.JSON)
-                        .body(body)
-                        .when()
-                        .post("/book/add")
-                        .then()
-                        .statusCode(400);
+        given()
+                .contentType(ContentType.JSON)
+                .body(body)
+                .when()
+                .post("/book/add")
+                .then()
+                .statusCode(400);
 
     }
 
@@ -103,18 +96,18 @@ public class BookTest extends BaseIntegrationTest {
                     "rating" : "WONDERFUL"
                 }
                 """;
-                given()
-                        .contentType(ContentType.JSON)
-                        .body(body)
-                        .when()
-                        .post("/book/add")
-                        .then()
-                        .statusCode(404);
+        given()
+                .contentType(ContentType.JSON)
+                .body(body)
+                .when()
+                .post("/book/add")
+                .then()
+                .statusCode(404);
 
     }
 
     @Test
-    public void testGetBookById(){
+    public void testGetBookById() {
         booksSetup();
         given()
                 .contentType(ContentType.JSON)
@@ -135,7 +128,7 @@ public class BookTest extends BaseIntegrationTest {
     }
 
     @Test
-    public void testGetBooksByTitle(){
+    public void testGetBooksByTitle() {
         booksSetup();
         given()
                 .contentType(ContentType.JSON)
@@ -148,7 +141,7 @@ public class BookTest extends BaseIntegrationTest {
     }
 
     @Test
-    public void testGetBooksBySeries(){
+    public void testGetBooksBySeries() {
         booksSetup();
         given()
                 .contentType(ContentType.JSON)
@@ -163,7 +156,7 @@ public class BookTest extends BaseIntegrationTest {
     }
 
     @Test
-    public void testGetBooksByGenre(){
+    public void testGetBooksByGenre() {
         booksSetup();
         given()
                 .contentType(ContentType.JSON)
@@ -178,7 +171,7 @@ public class BookTest extends BaseIntegrationTest {
     }
 
     @Test
-    public void testGetReadBooks(){
+    public void testGetReadBooks() {
         booksSetup();
         given()
                 .contentType(ContentType.JSON)
@@ -193,7 +186,7 @@ public class BookTest extends BaseIntegrationTest {
     }
 
     @Test
-    public void testGetBooksByRating(){
+    public void testGetBooksByRating() {
         booksSetup();
         given()
                 .contentType(ContentType.JSON)
@@ -206,7 +199,7 @@ public class BookTest extends BaseIntegrationTest {
                 .body("bookId[1]", equalTo(3));
     }
 
-    public void booksSetup(){
+    public void booksSetup() {
         String bodyAuthor1 = """
                 {
                 "name" : "Robin Hobb"
@@ -238,7 +231,6 @@ public class BookTest extends BaseIntegrationTest {
                 .body(bodyAuthor3)
                 .when()
                 .post("/author/add");
-
 
 
         String bodyBook1 = """
@@ -310,23 +302,8 @@ public class BookTest extends BaseIntegrationTest {
                 .then();
 
     }
-
-
-
-
-
-//    public void testGetBook() {
-//        String json = given()
-//                .pathParam("id", 13)
-//                .when()
-//                .get("/book/{id}")
-//                .then()
-//                .statusCode(200)
-//                .extract()
-//                .asString();
-//
-//        ReadContext jsonPath = JsonPath.parse(json);
-//
-//        assertEquals("17", jsonPath.read("$.bookId").toString());
-//    }
 }
+
+
+
+

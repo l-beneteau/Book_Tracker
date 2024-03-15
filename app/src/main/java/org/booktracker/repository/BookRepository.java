@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface BookRepository extends CrudRepository<BookEntity, Integer> {
     BookEntity findById(int id);
-    BookEntity findByTitle(String title);
 
     @Query("SELECT b FROM BookEntity b WHERE (:title is null or b.title = :title) and " +
             "(:series is null or b.series = :series) and " +
