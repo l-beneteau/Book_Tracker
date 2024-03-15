@@ -30,12 +30,7 @@ public class BookTest extends BaseIntegrationTest {
                 .contentType(ContentType.JSON)
                 .body(bodyAuthor)
                 .when()
-                .post("/author/add")
-                .then()
-                .statusCode(200)
-                .header("Content-Type", "application/json")
-                .body("authorId", equalTo(1))
-                .body("name", equalTo("Robin Hobb"));
+                .post("/author/add");
 
         String bodyBook = """
                 {
@@ -58,9 +53,11 @@ public class BookTest extends BaseIntegrationTest {
                         .then()
                         .statusCode(200)
                         .header("Content-Type", "application/json")
-                        .body("bookId", notNullValue())
+                        .body("bookId", equalTo(1))
                         .body("title", equalTo("Assassin's Apprentice"))
                         .body("series", equalTo("Farseer trilogy"))
+                        .body("authors[0].authorId", equalTo(1))
+                        .body("authors[0].name", equalTo("Robin Hobb"))
                         .body("year", equalTo(1995))
                         .body("genre", equalTo("FANTASY"))
                         .body("pages", equalTo(400))
@@ -72,6 +69,7 @@ public class BookTest extends BaseIntegrationTest {
 
     @Test
     public void testAddBookNoAuthorException() {
+
         String body = """
                 {
                     "title" : "Assassin's Apprentice",
@@ -80,8 +78,8 @@ public class BookTest extends BaseIntegrationTest {
                     "year" : 1995,
                     "genre" : "FANTASY",
                     "pages" : 400,
-                    "readed" : true,
-                    "rating" : "WONDERFUL",
+                    "read" : true,
+                    "rating" : "WONDERFUL"
                 }
                 """;
         String json =
@@ -92,6 +90,32 @@ public class BookTest extends BaseIntegrationTest {
                         .post("/book/add")
                         .then()
                         .statusCode(400)
+                        .toString();
+
+    }
+
+    @Test
+    public void testAddBookAuthorNotFoundException() {
+        String body = """
+                {
+                    "title" : "Assassin's Apprentice",
+                    "series" : "Farseer trilogy",
+                    "authors":[8],
+                    "year" : 1995,
+                    "genre" : "FANTASY",
+                    "pages" : 400,
+                    "read" : true,
+                    "rating" : "WONDERFUL"
+                }
+                """;
+        String json =
+                given()
+                        .contentType(ContentType.JSON)
+                        .body(body)
+                        .when()
+                        .post("/book/add")
+                        .then()
+                        .statusCode(404)
                         .toString();
 
     }

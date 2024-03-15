@@ -71,9 +71,6 @@ public class BookService {
 
 
     public BookEntity saveBook(BookParameter bookParameter) throws AuthorNotFoundException, NoAuthorException {
-        if(bookRepository.findByTitle(bookParameter.getTitle()) != null){
-            return bookRepository.findByTitle(bookParameter.getTitle());
-        }
         BookEntity bookEntity = new BookEntity();
         bookEntity.setTitle(bookParameter.getTitle());
         if(getAuthorEntitiesFromBook(bookParameter).isEmpty()){

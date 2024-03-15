@@ -77,7 +77,10 @@ public class AuthorService {
         authorRepository.deleteById(id);
     }
 
-    public AuthorEntity findAuthorEntityById(int authorId) {
+    public AuthorEntity findAuthorEntityById(int authorId) throws AuthorNotFoundException {
+        if (authorRepository.findById(authorId) == null){
+            throw new AuthorNotFoundException(authorId);
+        }
         return authorRepository.findById(authorId);
     }
 }

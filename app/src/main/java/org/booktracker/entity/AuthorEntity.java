@@ -16,7 +16,6 @@ import java.util.Set;
 public class AuthorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "authorid")
     private Integer authorId;
     private String name;
 
