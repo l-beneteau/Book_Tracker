@@ -4,74 +4,118 @@ This API provides functionality to store and manage books in a database. It allo
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+To run this project, the relational database management system PostgreSQL is needed. The database schema is on booktracker-model.sql 
 
-### Prerequisites
+Before launching the project, create a file application.properties according to the template app/src/main/resources/application.properties
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+To build the project :
 
 ```
-Give the example
+./gradlew bootRun
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Endpoints
 
-### Get all authors
-
+### Add an author
 ```
-GET /authors
+POST /author
 ```
-Returns a list of all authors stored in the database.
+Add an author to the database.
 
-Request
-No request parameters required.
+Request body
+```
+{
+    "name": "Author Name"
+}
+```
+
+Request details
+
+* `name` (String): Name of the author.
+
+### Get author by ID
+```
+GET /author/{id}
+```
+Returns the details of an author specified by its ID.
+
+Request details
+
+* `id` (integer): ID of the author to retrieve.
 
 Response
 ```
 [
     {
         "authorId": 1,
-        "name": "Author Name 1",
+        "name": "Robin Hobb",
         "books": [
             {
-                "bookId": 1,
-                "title": "Book Title 1",
-                "series": "Series 1",
-                "year": 0,
+                "bookId": 2,
+                "title": "Royal Assassin",
+                "series": "Farseer trilogy",
+                "year": 1996,
                 "genre": "FANTASY",
-                "pages": 0,
+                "pages": 580,
+                "read": true,
+                "rating": "GOOD",
+                "notes": null
+            },
+            {
+                "bookId": 1,
+                "title": "Assassin's Apprentice",
+                "series": "Farseer trilogy",
+                "year": 1995,
+                "genre": "FANTASY",
+                "pages": 400,
                 "read": true,
                 "rating": "WONDERFUL",
-                "notes": "Lorem Ipsum"
+                "notes": null
             }
+        ]
+    }
+]
+```
+### Get authors
+
+```
+GET /author?name={name}
+```
+
+Return the details of all the authors with specified name, if the parameter name is not entered, return all the authors in the database. 
+
+Request details
+
+* `name` (String): name of the authors to retrieve.
+
+Response
+```
+[
+    {
+        "authorId": 1,
+        "name": "Robin Hobb",
+        "books": [
             {
                 "bookId": 2,
-                "title": "Book Title 2",
-                "series": "Series 2",
-                "year": 0,
+                "title": "Royal Assassin",
+                "series": "Farseer trilogy",
+                "year": 1996,
                 "genre": "FANTASY",
-                "pages": 0,
+                "pages": 580,
+                "read": true,
+                "rating": "GOOD",
+                "notes": null
+            },
+            {
+                "bookId": 1,
+                "title": "Assassin's Apprentice",
+                "series": "Farseer trilogy",
+                "year": 1995,
+                "genre": "FANTASY",
+                "pages": 400,
                 "read": true,
                 "rating": "WONDERFUL",
-                "notes": "Lorem Ipsum"
+                "notes": null
             }
         ]
     }
@@ -79,32 +123,126 @@ Response
 ```
 
 
-## Built With
+### Add book
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+```
+POST /book
+```
+Add a book to the database.
 
-## Contributing
+Request body
+```
+{
+    "title": "Book title",
+    "authors": [Author 1 ID, Author 2 ID, ...],
+    "series": "series",
+    "year": year,
+    "genre": genre,
+    "pages": pages nb,
+    "read": read,
+    "rating": "rating",
+    "notes": "Lorem ipsum"
+}
+```
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Request details
 
-## Versioning
+* `title` (String): title of the book.
+* `authors` (String): tList of the book's authors.
+* `series` (String): seriesof the book.
+* `year` (integer): year the book was published.
+* `genre` (String): genre of the book (FANTASY, SCIENCE_FICTION, DOCUMENTARY, POPULARIZATION, COMIC_BOOK, FANTASTIC or DETECTIVE_NOVEL)
+* `read` (Boolean): true if the book is read, false otherwise
+* `rating` (String): rating of the book (UNFINISHED, MEH, GOOD or WONDERFUL).
+* `notes` (String): notes about the book.
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
-## Authors
+### Get book by ID
+```
+GET /book/{id}
+```
+Returns the details of a book specified by its ID.
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+Request details
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* `id` (integer): ID of the book to retrieve.
 
-## License
+Response
+```
+{
+    "bookId": 1,
+    "title": "Assassin's Apprentice",
+    "authors": [
+        {
+            "authorId": 1,
+            "name": "Robin Hobb"
+        }
+    ],
+    "series": "Farseer trilogy",
+    "year": 1995,
+    "genre": "FANTASY",
+    "pages": 400,
+    "read": true,
+    "rating": "WONDERFUL",
+    "notes": null
+}
+```
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+### Get book by properties
+```
+GET /book?title={title}&series={series}&year={year}&genre={genre}&read={read}&rating={rating}
+```
+Returns the details of the books that matches all the entered properties, each property is optional.
 
-## Acknowledgments
+Request details
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* `title` (String): title of the books to retrieve.
+* `series` (String): series of the books to retrieve.
+* `year` (integer): year the books to retrieve was published.
+* `genre` (String): genre of the books to retrieve (FANTASY, SCIENCE_FICTION, DOCUMENTARY, POPULARIZATION, COMIC_BOOK, FANTASTIC or DETECTIVE_NOVEL)
+* `read` (Boolean): true if the books to retrieve are read, false otherwise
+* `rating` (String): rating of the books to retrieve (UNFINISHED, MEH, GOOD or WONDERFUL).
+
+Response
+```
+[
+    {
+        "bookId": 1,
+        "title": "Assassin's Apprentice",
+        "authors": [
+            {
+                "authorId": 1,
+                "name": "Robin Hobb"
+            }
+        ],
+        "series": "Farseer trilogy",
+        "year": 1995,
+        "genre": "FANTASY",
+        "pages": 400,
+        "read": true,
+        "rating": "WONDERFUL",
+        "notes": null
+    },
+    {
+        "bookId": 2,
+        "title": "Royal Assassin",
+        "authors": [
+            {
+                "authorId": 1,
+                "name": "Robin Hobb"
+            }
+        ],
+        "series": "Farseer trilogy",
+        "year": 1996,
+        "genre": "FANTASY",
+        "pages": 580,
+        "read": true,
+        "rating": "GOOD",
+        "notes": null
+    }
+]
+```
+
+
+
+
