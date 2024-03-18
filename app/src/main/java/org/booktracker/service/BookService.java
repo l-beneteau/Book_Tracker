@@ -96,9 +96,4 @@ public class BookService {
         return authorEntities;
     }
 
-
-
-    public void deleteBookById(int id){
-        bookRepository.deleteById(id);
-    }
 }
