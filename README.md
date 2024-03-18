@@ -4,14 +4,18 @@ This API provides functionality to store and manage books in a database. It allo
 
 ## Getting Started
 
-To run this project, the relational database management system PostgreSQL is needed. The database schema is on booktracker-model.sql 
+To run this project, you'll require the PostgreSQL relational database management system. The database schema is defined in the file named "booktracker-model.sql".
 
-Before launching the project, create a file application.properties according to the template app/src/main/resources/application.properties
+Prior to initiating the project, generate a file named "application.properties" following the provided template located at "app/src/main/resources/application.properties".
 
-To build the project :
+To run the project, use the following command:
 
 ```
 ./gradlew bootRun
+```
+If you encounter a "permission denied" error during the compilation process, attempt the following command:
+```
+chmod +x gradlew
 ```
 
 ## Endpoints
