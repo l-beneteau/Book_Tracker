@@ -62,6 +62,8 @@ Response
                 "genre": "FANTASY",
                 "pages": 580,
                 "read": true,
+                "started": "2023-04-20",
+                "ended": "2023-06-01",
                 "rating": "GOOD",
                 "notes": null
             },
@@ -73,6 +75,8 @@ Response
                 "genre": "FANTASY",
                 "pages": 400,
                 "read": true,
+                "started": "2023-02-20",
+                "ended": "2023-04-01",
                 "rating": "WONDERFUL",
                 "notes": null
             }
@@ -107,6 +111,8 @@ Response
                 "genre": "FANTASY",
                 "pages": 580,
                 "read": true,
+                "started": "2023-04-20",
+                "ended": "2023-06-01",
                 "rating": "GOOD",
                 "notes": null
             },
@@ -118,6 +124,8 @@ Response
                 "genre": "FANTASY",
                 "pages": 400,
                 "read": true,
+                "started": "2023-02-20",
+                "ended": "2023-04-01",
                 "rating": "WONDERFUL",
                 "notes": null
             }
@@ -144,6 +152,8 @@ Request body
     "genre": genre,
     "pages": pages nb,
     "read": read,
+    "started":started,
+    "ended":ended
     "rating": "rating",
     "notes": "Lorem ipsum"
 }
@@ -157,6 +167,8 @@ Request details
 * `year` (integer): year the book was published.
 * `genre` (String): genre of the book (FANTASY, SCIENCE_FICTION, DOCUMENTARY, POPULARIZATION, COMIC_BOOK, FANTASTIC or DETECTIVE_NOVEL)
 * `read` (Boolean): true if the book is read, false otherwise
+* `started` (Date): date the book was started (fotmat : "yyyy-mm-dd")
+* `ended` (Date): date the book was finished (fotmat : "yyyy-mm-dd")
 * `rating` (String): rating of the book (UNFINISHED, MEH, GOOD or WONDERFUL).
 * `notes` (String): notes about the book.
 
@@ -187,6 +199,8 @@ Response
     "genre": "FANTASY",
     "pages": 400,
     "read": true,
+    "started": "2023-02-20",
+    "ended": "2023-04-01",
     "rating": "WONDERFUL",
     "notes": null
 }
@@ -224,6 +238,8 @@ Response
         "genre": "FANTASY",
         "pages": 400,
         "read": true,
+        "started": "2023-02-20",
+        "ended": "2023-04-01",
         "rating": "WONDERFUL",
         "notes": null
     },
@@ -241,6 +257,8 @@ Response
         "genre": "FANTASY",
         "pages": 580,
         "read": true,
+        "started": "2023-04-20",
+        "ended": "2023-06-01",
         "rating": "GOOD",
         "notes": null
     }
