@@ -2,6 +2,7 @@ package org.booktracker.model;
 
 import lombok.*;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,8 @@ public class Book {
     private Genre genre;
     private int pages;
     private boolean read;
+    private Date started;
+    private Date ended;
     private Rating rating;
     private String notes;
 

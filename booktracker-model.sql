@@ -12,6 +12,8 @@ CREATE TABLE book (
 	genre Varchar(50),
 	pages Int,
 	read Boolean,
+	started Date,
+	ended Date,
 	rating Varchar(20),
 	notes Varchar(1000),
 	PRIMARY KEY (book_id)

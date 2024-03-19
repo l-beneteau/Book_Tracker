@@ -8,6 +8,7 @@ import org.booktracker.model.Book;
 import org.booktracker.model.Genre;
 import org.booktracker.model.Rating;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +22,8 @@ public class BookResponse {
     private Genre genre;
     private Integer pages;
     private boolean read;
+    private Date started;
+    private Date ended;
     private Rating rating;
     private String notes;
     
@@ -33,6 +36,8 @@ public class BookResponse {
         bookResponse.genre=book.getGenre();
         bookResponse.pages=book.getPages();
         bookResponse.read=book.isRead();
+        bookResponse.started=book.getStarted();
+        bookResponse.ended=book.getEnded();
         bookResponse.rating=book.getRating();
         bookResponse.notes=book.getNotes();
         for(Author author : book.getAuthors()){
@@ -49,6 +54,8 @@ public class BookResponse {
         bookResponse.genre=book.getGenre();
         bookResponse.pages=book.getPages();
         bookResponse.read=book.isRead();
+        bookResponse.started=book.getStarted();
+        bookResponse.ended=book.getEnded();
         bookResponse.rating=book.getRating();
         bookResponse.notes=book.getNotes();
         for(AuthorEntity author : book.getAuthors()){

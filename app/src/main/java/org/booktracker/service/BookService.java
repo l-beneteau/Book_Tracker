@@ -2,6 +2,7 @@ package org.booktracker.service;
 
 import org.booktracker.exception.AuthorNotFoundException;
 import org.booktracker.exception.BookNotFoundException;
+import org.booktracker.exception.InvalidDateException;
 import org.booktracker.exception.NoAuthorException;
 import org.booktracker.model.Author;
 import org.booktracker.model.Book;
@@ -53,6 +54,8 @@ public class BookService {
         book.setGenre(bookEntity.getGenre());
         book.setPages(bookEntity.getPages());
         book.setRead(bookEntity.isRead());
+        book.setStarted(bookEntity.getStarted());
+        book.setEnded(bookEntity.getEnded());
         book.setRating(bookEntity.getRating());
         book.setNotes(bookEntity.getNotes());
         return book;
@@ -70,7 +73,7 @@ public class BookService {
     }
 
 
-    public BookEntity saveBook(BookParameter bookParameter) throws AuthorNotFoundException, NoAuthorException {
+    public BookEntity saveBook(BookParameter bookParameter) throws AuthorNotFoundException, NoAuthorException, InvalidDateException {
         BookEntity bookEntity = new BookEntity();
         bookEntity.setTitle(bookParameter.getTitle());
         if(getAuthorEntitiesFromBook(bookParameter).isEmpty()){
@@ -81,9 +84,17 @@ public class BookService {
         bookEntity.setYear(bookParameter.getYear());
         bookEntity.setGenre(bookParameter.getGenre());
         bookEntity.setPages(bookParameter.getPages());
-        if(bookParameter.getRead() != null){
+        if(bookParameter.getEnded() != null){
+            bookEntity.setRead(true);
+        }
+        else if(bookParameter.getRead() != null){
             bookEntity.setRead(bookParameter.getRead());
         }
+        bookEntity.setStarted(bookParameter.getStarted());
+        if(bookParameter.getStarted().after(bookParameter.getEnded())){
+            throw new InvalidDateException();
+        }
+        bookEntity.setEnded(bookParameter.getEnded());
         bookEntity.setRating(bookParameter.getRating());
         bookEntity.setNotes(bookParameter.getNotes());
         return bookRepository.save(bookEntity);

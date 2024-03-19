@@ -2,6 +2,7 @@ package org.booktracker.controller;
 
 import org.booktracker.exception.AuthorNotFoundException;
 import org.booktracker.exception.BookNotFoundException;
+import org.booktracker.exception.InvalidDateException;
 import org.booktracker.exception.NoAuthorException;
 import org.booktracker.model.Book;
 import org.booktracker.parameter.BookParameter;
@@ -52,11 +53,10 @@ public class BookController {
     BookResponse newBook(@RequestBody BookParameter book) {
         try{
             return BookResponse.from(bookService.saveBook(book));
-        }
-        catch(AuthorNotFoundException e){
+        } catch (AuthorNotFoundException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage(), e);
-        } catch (NoAuthorException e) {
+        } catch (NoAuthorException | InvalidDateException e) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }

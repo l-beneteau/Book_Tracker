@@ -34,6 +34,10 @@ public class BookEntity {
     private Genre genre;
     private int pages;
     private boolean read;
+    @Temporal(TemporalType.DATE)
+    private Date started;
+    @Temporal(TemporalType.DATE)
+    private Date ended;
     @Convert(converter = org.booktracker.entity.RatingConverter.class)
     private Rating rating;
     private String notes;

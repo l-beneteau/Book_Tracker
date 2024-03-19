@@ -6,6 +6,8 @@ import org.booktracker.model.Book;
 import org.booktracker.model.Genre;
 import org.booktracker.model.Rating;
 
+import java.util.Date;
+
 @Data
 public class BookOfAuthorResponse {
     private Integer bookId;
@@ -15,6 +17,8 @@ public class BookOfAuthorResponse {
     private Genre genre;
     private Integer pages;
     private boolean read;
+    private Date started;
+    private Date ended;
     private Rating rating;
     private String notes;
 
@@ -27,6 +31,8 @@ public class BookOfAuthorResponse {
         bookOfAuthorResponse.genre=book.getGenre();
         bookOfAuthorResponse.pages=book.getPages();
         bookOfAuthorResponse.read=book.isRead();
+        bookOfAuthorResponse.started=book.getStarted();
+        bookOfAuthorResponse.ended=book.getEnded();
         bookOfAuthorResponse.rating=book.getRating();
         bookOfAuthorResponse.notes=book.getNotes();
         return bookOfAuthorResponse;
@@ -41,6 +47,8 @@ public class BookOfAuthorResponse {
         bookOfAuthorResponse.genre=book.getGenre();
         bookOfAuthorResponse.pages=book.getPages();
         bookOfAuthorResponse.read=book.isRead();
+        bookOfAuthorResponse.started=book.getStarted();
+        bookOfAuthorResponse.ended=book.getEnded();
         bookOfAuthorResponse.rating=book.getRating();
         bookOfAuthorResponse.notes=book.getNotes();
         return bookOfAuthorResponse;

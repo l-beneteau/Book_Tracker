@@ -4,6 +4,7 @@ import lombok.Data;
 import org.booktracker.model.Genre;
 import org.booktracker.model.Rating;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,8 @@ public class BookParameter {
     private Genre genre;
     private int pages;
     private Boolean read;
+    private Date started;
+    private Date ended;
     private Rating rating;
     private String notes;
 }
