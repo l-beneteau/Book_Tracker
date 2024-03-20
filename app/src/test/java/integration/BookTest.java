@@ -242,6 +242,8 @@ public class BookTest extends BaseIntegrationTest {
                     "genre" : "FANTASY",
                     "pages" : 400,
                     "read" : true,
+                    "started" : "2022-11-01",
+                    "ended" : "2022-12-01",
                     "rating" : "WONDERFUL"
                 }
                 """;
@@ -260,6 +262,8 @@ public class BookTest extends BaseIntegrationTest {
                     "genre" : "FANTASY",
                     "pages" : 580,
                     "read" : true,
+                    "started" : "2022-12-01",
+                    "ended" : "2023-01-15",
                     "rating" : "GOOD"
                 }""";
         given()
@@ -276,6 +280,8 @@ public class BookTest extends BaseIntegrationTest {
                     "genre" : "POPULARIZATION",
                     "pages" : 337,
                     "read" : true,
+                    "started" : "2023-01-16",
+                    "ended" : "2023-03-01",
                     "rating" : "WONDERFUL"
                 }""";
         given()

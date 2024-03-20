@@ -32,6 +32,9 @@ public class BookService {
         return getBookFromEntity(bookEntity);
     }
     public List<Book> findBooks(BookParameter bookParameter) throws BookNotFoundException {
+//        List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
+//                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getRead(), bookParameter.getStarted(),
+//                bookParameter.getEnded(), bookParameter.getRating());
         List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
                 bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getRead(), bookParameter.getRating());
         if (bookEntities.isEmpty()){
@@ -91,7 +94,8 @@ public class BookService {
             bookEntity.setRead(bookParameter.getRead());
         }
         bookEntity.setStarted(bookParameter.getStarted());
-        if(bookParameter.getStarted().after(bookParameter.getEnded())){
+        if(bookParameter.getStarted() != null && bookParameter.getEnded() != null &&
+                bookParameter.getStarted().after(bookParameter.getEnded())){
             throw new InvalidDateException();
         }
         bookEntity.setEnded(bookParameter.getEnded());
@@ -106,5 +110,7 @@ public class BookService {
             authorEntities.add(authorService.findAuthorEntityById(authorId));
         return authorEntities;
     }
+
+
 
 }
