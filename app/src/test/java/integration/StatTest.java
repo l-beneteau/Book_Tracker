@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.nullValue;
 
 public class StatTest extends BaseIntegrationTest{
     @Test
-    public void testGetStatNbBooks(){
+    public void testGetStatNoParameter(){
         databaseSetup();
         given()
                 .contentType(ContentType.JSON)
@@ -16,7 +17,8 @@ public class StatTest extends BaseIntegrationTest{
                 .get("/stat")
                 .then()
                 .statusCode(200)
-                .body("nbBook", equalTo(5));
+                .body("stat[0].nbBook", equalTo(4))
+                .body("stat[0].nbPage", equalTo(1765));
 
     }
 
@@ -153,7 +155,7 @@ public class StatTest extends BaseIntegrationTest{
                 }""";
         given()
                 .contentType(ContentType.JSON)
-                .body(bodyBook4)
+                .body(bodyBook5)
                 .when()
                 .post("/book/add")
                 .then();

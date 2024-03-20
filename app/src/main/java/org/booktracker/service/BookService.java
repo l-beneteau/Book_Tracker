@@ -37,9 +37,9 @@ public class BookService {
 //                bookParameter.getEnded(), bookParameter.getRating());
         List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
                 bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getRead(), bookParameter.getRating());
-        if (bookEntities.isEmpty()){
-            throw new BookNotFoundException(bookParameter);
-        }
+//        if (bookEntities.isEmpty()){
+//            throw new BookNotFoundException(bookParameter);
+//        }
         List<Book> books = new ArrayList<>();
         for(BookEntity bookEntity : bookEntities){
             books.add(getBookFromEntity(bookEntity));
