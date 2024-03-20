@@ -22,6 +22,47 @@ public class StatTest extends BaseIntegrationTest{
 
     }
 
+    @Test
+    public void testGetStatWithParameter(){
+        databaseSetup();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/stat?rating=WONDERFUL")
+                .then()
+                .statusCode(200)
+                .body("stat[0].nbBook", equalTo(3))
+                .body("stat[0].nbPage", equalTo(1185));
+
+    }
+
+    @Test
+    public void testGetStatWithParameterAndGroup(){
+        databaseSetup();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/stat?rating=WONDERFUL&groupType=GENRE")
+                .then()
+                .statusCode(200)
+                .body("stat[0].nbBook", equalTo(2))
+                .body("stat[0].nbPage", equalTo(848))
+                .body("stat[1].nbBook", equalTo(0))
+                .body("stat[1].nbPage", equalTo(0))
+                .body("stat[2].nbBook", equalTo(0))
+                .body("stat[2].nbPage", equalTo(0))
+                .body("stat[3].nbBook", equalTo(1))
+                .body("stat[3].nbPage", equalTo(337))
+                .body("stat[4].nbBook", equalTo(0))
+                .body("stat[4].nbPage", equalTo(0))
+                .body("stat[5].nbBook", equalTo(0))
+                .body("stat[5].nbPage", equalTo(0))
+                .body("stat[6].nbBook", equalTo(0))
+                .body("stat[6].nbPage", equalTo(0));
+
+
+    }
+
     public void databaseSetup() {
         String bodyAuthor1 = """
                 {

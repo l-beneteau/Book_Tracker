@@ -265,6 +265,80 @@ Response
 ]
 ```
 
+### Statistics on read books
+```
+GET /stats?series={series}&genre={genre}&rating={rating}&grouptype={grouptype}
+```
+This endpoint retrieves statistics about the read books based on various criteria. 
+It returns aggregated data containing information about the number of books 
+and total pages. Each parameter is optional.
 
+Request details
 
+* `series` (String): Filter books by series.
+* `genre` (String): Filter books by genre (FANTASY, SCIENCE_FICTION, DOCUMENTARY, POPULARIZATION, COMIC_BOOK, FANTASTIC or DETECTIVE_NOVEL)
+* `rating` (String): Filter books by rating (UNFINISHED, MEH, GOOD or WONDERFUL).
+* `grouptype`(String):Specifies the grouping type for the statistics(GENRE or RATING).
 
+Response
+
+```
+[
+    {
+        "groupType": "GENRE",
+        "groupValue": "FANTASY",
+        "stat": {
+            "nbBook": 1,
+            "nbPage": 400
+        }
+    },
+    {
+        "groupType": "GENRE",
+        "groupValue": "SCIENCE_FICTION",
+        "stat": {
+            "nbBook": 0,
+            "nbPage": 0
+        }
+    },
+    {
+        "groupType": "GENRE",
+        "groupValue": "DOCUMENTARY",
+        "stat": {
+            "nbBook": 0,
+            "nbPage": 0
+        }
+    },
+    {
+        "groupType": "GENRE",
+        "groupValue": "POPULARIZATION",
+        "stat": {
+            "nbBook": 1,
+            "nbPage": 337
+        }
+    },
+    {
+        "groupType": "GENRE",
+        "groupValue": "COMIC_BOOK",
+        "stat": {
+            "nbBook": 0,
+            "nbPage": 0
+        }
+    },
+    {
+        "groupType": "GENRE",
+        "groupValue": "FANTASTIC",
+        "stat": {
+            "nbBook": 0,
+            "nbPage": 0
+        }
+    },
+    {
+        "groupType": "GENRE",
+        "groupValue": "DETECTIVE_NOVEL",
+        "stat": {
+            "nbBook": 0,
+            "nbPage": 0
+        }
+    }
+]
+```
