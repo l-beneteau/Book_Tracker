@@ -13,7 +13,12 @@ import org.booktracker.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 @Service
 public class BookService {
@@ -32,11 +37,13 @@ public class BookService {
         return getBookFromEntity(bookEntity);
     }
     public List<Book> findBooks(BookParameter bookParameter) throws BookNotFoundException {
-//        List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
-//                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getRead(), bookParameter.getStarted(),
-//                bookParameter.getEnded(), bookParameter.getRating());
+        Date startDateParam = bookParameter.getStarted() != null ? new Date(bookParameter.getStarted().toInstant().getEpochSecond() * 1000): null;
+        Date endDateParam = bookParameter.getEnded() != null ? new Date(bookParameter.getEnded().toInstant().getEpochSecond() * 1000): null;
         List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
-                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getRead(), bookParameter.getRating());
+                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getRead(), startDateParam,
+                endDateParam, bookParameter.getRating());
+//        List<BookEntity> bookEntities = bookRepository.find(bookParameter.getTitle(), bookParameter.getSeries(),
+//                bookParameter.getYear(), bookParameter.getGenre(), bookParameter.getRead(), bookParameter.getRating());
 //        if (bookEntities.isEmpty()){
 //            throw new BookNotFoundException(bookParameter);
 //        }

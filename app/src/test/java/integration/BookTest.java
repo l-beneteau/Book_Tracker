@@ -199,6 +199,19 @@ public class BookTest extends BaseIntegrationTest {
                 .body("bookId[1]", equalTo(3));
     }
 
+    @Test
+    public void testGetBookByDate(){
+        booksSetup();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/book?started=2022-11-15&ended=2023-02-01")
+                .then()
+                .statusCode(200)
+                .body("bookId", hasSize(1))
+                .body("bookId[0]", equalTo(2));
+    }
+
     public void booksSetup() {
         String bodyAuthor1 = """
                 {

@@ -13,24 +13,24 @@ import java.util.List;
 public interface BookRepository extends CrudRepository<BookEntity, Integer> {
     BookEntity findById(int id);
 
-    @Query("SELECT b FROM BookEntity b WHERE (:title is null or b.title = :title) and " +
-            "(:series is null or b.series = :series) and " +
-            "(:year=0 or b.year = :year) and " +
-            "(:genre is null or b.genre = :genre) and" +
-            "(:read is null or b.read = :read) and " +
-            "(:rating is null or b.rating = :rating)")
-    List<BookEntity> find (@Param("title") String title, @Param("series") String series, @Param("year") int year,
-                           @Param("genre") Genre genre, @Param("read") Boolean read, @Param("rating") Rating rating);
-
 //    @Query("SELECT b FROM BookEntity b WHERE (:title is null or b.title = :title) and " +
 //            "(:series is null or b.series = :series) and " +
 //            "(:year=0 or b.year = :year) and " +
 //            "(:genre is null or b.genre = :genre) and" +
 //            "(:read is null or b.read = :read) and " +
-//            "(:started is null or b.started >= :started) and " +
-//            "(:ended is null or b.ended <= :ended) and " +
 //            "(:rating is null or b.rating = :rating)")
 //    List<BookEntity> find (@Param("title") String title, @Param("series") String series, @Param("year") int year,
-//                           @Param("genre") Genre genre, @Param("read") Boolean read,@Param("started") Date started,
-//                           @Param("ended") Date ended, @Param("rating") Rating rating);
+//                           @Param("genre") Genre genre, @Param("read") Boolean read, @Param("rating") Rating rating);
+
+    @Query("SELECT b FROM BookEntity b WHERE (:title is null or b.title = :title) and " +
+            "(:series is null or b.series = :series) and " +
+            "(:year=0 or b.year = :year) and " +
+            "(:genre is null or b.genre = :genre) and" +
+            "(:read is null or b.read = :read) and " +
+            "(coalesce(:started, null) is null or b.started >= :started) and " + // use coalesce for null check to work with Date
+            "(coalesce(:ended, null) is null or b.ended <= :ended) and " +
+            "(:rating is null or b.rating = :rating)")
+    List<BookEntity> find (@Param("title") String title, @Param("series") String series, @Param("year") int year,
+                           @Param("genre") Genre genre, @Param("read") Boolean read,@Param("started") Date started,
+                           @Param("ended") Date ended, @Param("rating") Rating rating);
 }
